@@ -65,6 +65,8 @@ class BigramModel(NGramModel):
                   to the current sentence. For details on which words the
                   BigramModel sees as candidates, see the spec.
         """
+        n = len(sentence)
+        sentence(n-1)
         pass
 
 ###############################################################################
