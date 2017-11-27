@@ -49,6 +49,9 @@ class UnigramModel(NGramModel):
                   the next token for the sentence. For explanations of how this
                   is determined for the UnigramModel, see the spec.
         """
+        if (len(self.nGramCounts) != 0):
+            return True
+        return False
         pass
 
     def getCandidateDictionary(self, sentence):
