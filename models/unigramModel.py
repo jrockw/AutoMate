@@ -28,7 +28,18 @@ class UnigramModel(NGramModel):
                   symbols to be included as their own tokens in
                   self.nGramCounts. For more details, see the spec.
         """
-        pass
+        self.nGramCounts = {}
+        text = self.prepData(text)
+        for a in text:
+            for b in a:
+                if (b =='$:::$'):
+                    pass
+                elif (b in self.nGramCounts): 
+                    self.nGramCounts[b] += 1
+                else :
+                    self.nGramCounts[b] = 1
+
+        
 
     def trainingDataHasNGram(self, sentence):
         """
@@ -61,3 +72,5 @@ if __name__ == '__main__':
     sentence = [ 'brown' ]
     unigramModel = UnigramModel()
     print(unigramModel)
+    unigramModel.trainModel(text)
+    print(unigramModel.nGramCounts)
