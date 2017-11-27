@@ -30,7 +30,21 @@ class BigramModel(NGramModel):
                   symbols to be included as their own tokens in
                   self.nGramCounts. For more details, see the spec.
         """
-        pass
+        self.nGramCounts = {}
+        text = self.prepData(text)
+        for a in text:
+            for i in range(0,len(a)-1):
+
+                if (a[i] in self.nGramCounts): 
+
+                    if(a[i+1] in self.nGramCounts[a[i]]):
+                        self.nGramCounts[a[i]][a[i+1]] += 1
+                    else:
+                        self.nGramCounts[a[i]][a[i+1]] = 1
+
+                else :
+                    self.nGramCounts[a[i]] = {}
+                    self.nGramCounts[a[i]][a[i+1]] = 1
 
     def trainingDataHasNGram(self, sentence):
         """
@@ -64,5 +78,6 @@ if __name__ == '__main__':
     sentence = [ 'lazy', 'quick' ]
     bigramModel = BigramModel()
     print(bigramModel)
-
+    bigramModel.trainModel(text)
+    print bigramModel.nGramCounts
 
