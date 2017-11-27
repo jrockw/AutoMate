@@ -32,7 +32,7 @@ class UnigramModel(NGramModel):
         text = self.prepData(text)
         for a in text:
             for b in a:
-                if (b =='^::^' || b =='^:::^'):
+                if (b =='^::^' or b =='^:::^'):
                     pass
                 elif (b in self.nGramCounts): 
                     self.nGramCounts[b] += 1
