@@ -128,12 +128,12 @@ def generateMusicalSentence(models, desiredLength, possiblePitches):
               should be exactly the same as the core.
     """
 
-    '''
+    
     sentence = ['^::^', '^:::^']
     currentLength = 0
     while ( not(sentenceTooLong(desiredLength, currentLength)) and sentence[-1] != '$:::$'):
         sentence.append( selectNGramModel(models, sentence).getNextNote(sentence, possiblePitches) )
-    '''
+    
 
 
   
