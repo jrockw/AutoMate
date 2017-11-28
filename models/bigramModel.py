@@ -72,7 +72,7 @@ class BigramModel(NGramModel):
         D = {}
         for i in self.nGramCounts:
           if i == sentence[len(sentence) - 1]:
-            D[i] = sentence[i]
+            D[i] = self.nGramCounts[i]
         return D
         pass
 
@@ -90,4 +90,5 @@ if __name__ == '__main__':
     bigramModel.trainModel(text)
     print bigramModel.nGramCounts
     print bigramModel.trainingDataHasNGram(sentence)
+    print bigramModel.getCandidateDictionary(sentence)
 
