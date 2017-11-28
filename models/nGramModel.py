@@ -101,7 +101,7 @@ class NGramModel(object):
           weights.append(i)
 
         cumulative = []
-        running_sum=0
+        running_sum = 0
         for p in weights:
           sum += p
           cumulative.append(sum)
@@ -128,6 +128,11 @@ class NGramModel(object):
                   For more information on how to put all these functions
                   together, see the spec.
         """
+
+        possibilities = self.getCandidateDictionary(self, sentence)
+        nextToken = self.weightedChoice(self, possibilities)
+        return nextToken
+
         pass
 
     def getNextNote(self, musicalSentence, possiblePitches):
