@@ -116,7 +116,16 @@ def generateLyricalSentence(models, desiredLength):
     """
     sentence = ['^::^', '^:::^']
     currentLength = 0
-    while ( not(sentenceTooLong(desiredLength, currentLength)) and sentence[-1] != '$:::$'):
+    while True:
+        if (sentence[-1] == '$:::$'):
+            return sentence[2:-1]
+            
+        if(sentenceTooLong(desiredLength, currentLength)):
+            sentence.append('$:::$')
+            return sentence[2:-1]
+
+        
+
         sentence.append( selectNGramModel(models, sentence).getNextToken(sentence))
         currentLength +=1
     return sentence
@@ -136,11 +145,17 @@ def generateMusicalSentence(models, desiredLength, possiblePitches):
     
     sentence = ['^::^', '^:::^']
     currentLength = 0
-    while ( not(sentenceTooLong(desiredLength, currentLength)) and sentence[-1] != '$:::$'):
-        sentence.append( selectNGramModel(models, sentence).getNextNote(sentence, possiblePitches) )
+    while True:
+        if(sentenceTooLong(desiredLength, currentLength)):
+            sentence.append('$:::$')
+            return sentence
+
+        if (sentence[-1] == '$:::$'):
+            return sentence
+
+        sentence.append( selectNGramModel(models, sentence).getNextNote(sentence, possiblePitches))
         currentLength +=1
     return sentence
-    
 
 
   
