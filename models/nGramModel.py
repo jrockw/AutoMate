@@ -146,6 +146,20 @@ class NGramModel(object):
                   For details on how to do this and how this will differ
                   from getNextToken, see the spec.
         """
+        allCandidates = self.getCandidateDictionary(posiblePitches)
+        constrainedCandidates = {}
+        for i in allCandidates:
+          for j in musicalSentence:
+            if musicalSentence[j].startswith(allCandidates[i]):
+              constrainedCandidates[i] = allCandidates[i]
+          if i == '$:::$':
+            constrainedCandidates[i] = allCandidates[i]
+        if constrainedCandidates != {}:
+          return self.weightedChoice(constrainedCandidates)
+        else:
+          randTup = (random.choice(possiblePitches) + '4', random.choice(NOTE_DURATIONS))
+          return randTup
+
         pass
 
 ###############################################################################

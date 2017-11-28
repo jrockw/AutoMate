@@ -80,6 +80,11 @@ def trainMusicModels(musicDirs):
     """
     models = [TrigramModel(), BigramModel(), UnigramModel()]
     # call dataLoader.loadMusic for each directory in musicDirs
+    for mdir in musicDirs:
+        music = loadMusic(mdir)
+        for model in models:
+            model.trainModel(music)
+    return models
 
     pass
 
