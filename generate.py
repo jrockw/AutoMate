@@ -116,6 +116,9 @@ def generateLyricalSentence(models, desiredLength):
               NGramModels, see the spec.
     """
     sentence = ['^::^', '^:::^']
+    currentLength = 0
+    while ( not(sentenceTooLong(desiredLength, currentLength)) and sentence[-1] != '$:::$'):
+        sentence.append( selectNGramModel(models, sentence).getNextToken(sentence))
     pass
 
 def generateMusicalSentence(models, desiredLength, possiblePitches):
@@ -127,8 +130,16 @@ def generateMusicalSentence(models, desiredLength, possiblePitches):
               function instead of getNextToken(). Everything else
               should be exactly the same as the core.
     """
+
+    '''
     sentence = ['^::^', '^:::^']
-    pass
+    currentLength = 0
+    while ( not(sentenceTooLong(desiredLength, currentLength)) and sentence[-1] != '$:::$'):
+        sentence.append( selectNGramModel(models, sentence).getNextNote(sentence, possiblePitches) )
+    '''
+
+
+  
 
 def runLyricsGenerator(models):
     """
