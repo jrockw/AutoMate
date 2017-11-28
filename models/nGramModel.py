@@ -92,16 +92,21 @@ class NGramModel(object):
         Effects:  returns a candidate item (a key in the candidates dictionary)
                   based on the algorithm described in the spec.
         """
+
         words = []
         for i in candidates.keys():
           words.append(i)
 
-        weights = []
+        weights = candidates.values()
+        '''
         for n in candidates.values():
-          weights.append(i)
+          weights.append()
+        '''
 
+        # testing
+        print 'WEIGHTS', weights
         cumulative = []
-        running_sum = 0
+        sum = 0
         for p in weights:
           sum += p
           cumulative.append(sum)
@@ -129,8 +134,8 @@ class NGramModel(object):
                   together, see the spec.
         """
 
-        possibilities = self.getCandidateDictionary(self, sentence)
-        nextToken = self.weightedChoice(self, possibilities)
+        possibilities = self.getCandidateDictionary(sentence)
+        nextToken = self.weightedChoice(possibilities)
         return nextToken
 
         pass

@@ -10,7 +10,7 @@ from models.unigramModel import *
 from models.bigramModel import *
 from models.trigramModel import *
 # FIXME Add your team name
-TEAM = 'YOUR NAME HERE'
+TEAM = 'trAIn'
 LYRICSDIRS = ['the_beatles']
 MUSICDIRS = ['gamecube']
 WAVDIR = 'wav/'
@@ -44,7 +44,7 @@ def printSongLyrics(verseOne, verseTwo, chorus):
             print (' '.join(line)).capitalize()
         print
 
-def trainLyricModels(lyricDirs):
+def trainLyricsModels(lyricDirs):
     """
     Requires: lyricDirs is a list of directories in data/lyrics/
     Modifies: nothing
@@ -58,7 +58,7 @@ def trainLyricModels(lyricDirs):
     """
     models = [TrigramModel(), BigramModel(), UnigramModel()]
     for ldir in lyricDirs:
-        lyrics = dataLoader.loadLyrics(ldir)
+        lyrics = loadLyrics(ldir)
         for model in models:
             model.trainModel(lyrics)
     return models
@@ -118,7 +118,10 @@ def generateLyricalSentence(models, desiredLength):
     currentLength = 0
     while ( not(sentenceTooLong(desiredLength, currentLength)) and sentence[-1] != '$:::$'):
         sentence.append( selectNGramModel(models, sentence).getNextToken(sentence))
-    pass
+        currentLength +=1
+    return sentence
+    
+    
 
 def generateMusicalSentence(models, desiredLength, possiblePitches):
     """
@@ -135,6 +138,8 @@ def generateMusicalSentence(models, desiredLength, possiblePitches):
     currentLength = 0
     while ( not(sentenceTooLong(desiredLength, currentLength)) and sentence[-1] != '$:::$'):
         sentence.append( selectNGramModel(models, sentence).getNextNote(sentence, possiblePitches) )
+        currentLength +=1
+    return sentence
     
 
 
@@ -187,10 +192,10 @@ def main():
               It prompts the user to choose to generate either lyrics or music.
     """
     # FIXME uncomment these lines when ready
-    # print('Starting program and loading data...')
-    # lyricsModels = trainLyricsModels(LYRICSDIRS)
-    # musicModels = trainMusicModels(MUSICDIRS)
-    # print('Data successfully loaded')
+    print('Starting program and loading data...')
+    lyricsModels = trainLyricsModels(LYRICSDIRS)
+    #musicModels = trainMusicModels(MUSICDIRS)
+    print('Data successfully loaded')
 
     print('Welcome to the ' + TEAM + ' music generator!')
     while True:
@@ -198,8 +203,8 @@ def main():
             userInput = int(raw_input(PROMPT))
             if userInput == 1:
                 # FIXME uncomment this line when ready
-                # runLyricsGenerator(lyricsModels)
-                print("Under construction")
+                runLyricsGenerator(lyricsModels)
+                #print("Under construction")
             elif userInput == 2:
                 # FIXME uncomment these lines when ready
                 # songName = raw_input('What would you like to name your song? ')
