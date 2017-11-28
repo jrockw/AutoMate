@@ -165,9 +165,7 @@ class NGramModel(object):
         else:
           randTup = (random.choice(possiblePitches) + '4', random.choice(NOTE_DURATIONS))
           return randTup
-          
 
-        
         pass
 
 ###############################################################################
