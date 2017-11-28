@@ -98,13 +98,7 @@ class NGramModel(object):
           words.append(i)
 
         weights = candidates.values()
-        '''
-        for n in candidates.values():
-          weights.append()
-        '''
-
-        # testing
-        print 'WEIGHTS', weights
+        
         cumulative = []
         sum = 0
         for p in weights:
