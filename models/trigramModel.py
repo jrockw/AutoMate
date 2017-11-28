@@ -39,6 +39,7 @@ class TrigramModel(NGramModel):
                   the next token for the sentence. For explanations of how this
                   is determined for the TrigramModel, see the spec.
         """
+        
         pass
 
     def getCandidateDictionary(self, sentence):
