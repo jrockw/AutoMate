@@ -109,10 +109,10 @@ class NGramModel(object):
         num_choice = random.randrange(0,sum)
 
         counter = 0
-        for j in cumulative
-          if j > num_choice
+        for j in cumulative:
+          if j > num_choice:
             return words[counter]
-          else
+          else:
             counter += 1
 
 
