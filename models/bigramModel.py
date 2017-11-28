@@ -54,8 +54,7 @@ class BigramModel(NGramModel):
                   the next token for the sentence. For explanations of how this
                   is determined for the BigramModel, see the spec.
         """
-        for i in self.nGramCounts:
-          if i == sentence[len(sentence) - 1]:
+        if sentence[-1] in self.nGramCounts:
             return True
         return False
         pass

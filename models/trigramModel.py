@@ -58,7 +58,10 @@ class TrigramModel(NGramModel):
                   the next token for the sentence. For explanations of how this
                   is determined for the TrigramModel, see the spec.
         """
-        
+        if sentence[-2] in self.nGramCounts:
+          if sentence[-1] in self.nGramCounts[sentence[-2]]:
+            return True
+        return False
         pass
 
     def getCandidateDictionary(self, sentence):
