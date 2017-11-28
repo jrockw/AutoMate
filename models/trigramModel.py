@@ -80,12 +80,13 @@ class TrigramModel(NGramModel):
 if __name__ == '__main__':
     # Add your tests here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    sentence = [ 'the', 'quick', 'brown' ]
+    sentence = [ 'the', 'quick', 'brown']
     text.append(sentence)
     trigramModel = TrigramModel()
     print(trigramModel)
     print text
     trigramModel.trainModel(text)
     print trigramModel.nGramCounts
+    print trigramModel.trainingDataHasNGram(sentence)
 
 
