@@ -92,15 +92,15 @@ class NGramModel(object):
         Effects:  returns a candidate item (a key in the candidates dictionary)
                   based on the algorithm described in the spec.
         """
-        words[]
+        words = []
         for i in candidates.keys():
           words.append(i)
 
-        weights[]
+        weights = []
         for n in candidates.values():
           weights.append(i)
 
-        cumulative[]
+        cumulative = []
         running_sum=0
         for p in weights:
           sum += p
