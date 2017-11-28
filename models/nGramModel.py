@@ -163,6 +163,9 @@ class NGramModel(object):
         if constrainedCandidates != {}:
           return self.weightedChoice(constrainedCandidates)
         else:
+          randTup = (random.choice(possiblePitches) + '4', random.choice(NOTE_DURATIONS))
+          return randTup
+          
 
         
         pass
