@@ -70,9 +70,9 @@ class BigramModel(NGramModel):
                   BigramModel sees as candidates, see the spec.
         """
         D = {}
-        for i in self.nGramCounts:
-          if i == sentence[len(sentence) - 1]:
-            D[i] = self.nGramCounts[i]
+        if sentence[-1] in self.nGramCounts:
+          for i in self.nGramCounts[sentence[-1]]:
+                D[i] = self.nGramCounts[sentence[-1]][i]
         return D
         pass
 
@@ -90,5 +90,6 @@ if __name__ == '__main__':
     bigramModel.trainModel(text)
     print bigramModel.nGramCounts
     print bigramModel.trainingDataHasNGram(sentence)
-    print bigramModel.getCandidateDictionary(sentence)
+    sentence3 = ['the']
+    print bigramModel.getCandidateDictionary(sentence3)
 

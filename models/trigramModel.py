@@ -73,12 +73,23 @@ class TrigramModel(NGramModel):
                   to the current sentence. For details on which words the
                   TrigramModel sees as candidates, see the spec.
         """
+        """
         D = {}
-        n = len(sentence)
         for i in self.nGramCounts:
-          if i == sentence[n - 2]:
-            if self.nGramCounts[i] == sentence[n - 1]:
-              D[i] = self.nGramCounts[i]
+          if i == sentence[-2]:
+            print 'hey'
+            print 'printing ngramcount',  self.nGramCounts[i]
+            for j in self.nGramCounts[i]:
+              if j == sentence[- 1]:
+                D[self.nGramCounts[i]] = self.nGramCounts[i][j]
+                print 'yo'
+        return D
+        """
+        D = {}
+        if sentence[-2] in self.nGramCounts:
+            if sentence[-1] in self.nGramCounts[sentence[-2]]:
+              for i in self.nGramCounts[sentence[-2]][sentence[-1]]:
+                D[i] = self.nGramCounts[sentence[-2]][sentence[-1]][i]
         return D
         pass
 
@@ -98,6 +109,7 @@ if __name__ == '__main__':
     trigramModel.trainModel(text)
     print trigramModel.nGramCounts
     print trigramModel.trainingDataHasNGram(sentence)
-    print trigramModel.getCandidateDictionary(sentence)
+    sentence3 = ['the', 'quick']
+    print trigramModel.getCandidateDictionary(sentence3)
 
 
