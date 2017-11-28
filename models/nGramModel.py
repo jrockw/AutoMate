@@ -92,6 +92,30 @@ class NGramModel(object):
         Effects:  returns a candidate item (a key in the candidates dictionary)
                   based on the algorithm described in the spec.
         """
+        words[]
+        for i in candidates.keys():
+          words.append(i)
+
+        weights[]
+        for n in candidates.values():
+          weights.append(i)
+
+        cumulative[]
+        running_sum=0
+        for p in weights:
+          sum += p
+          cumulative.append(sum)
+
+        num_choice = random.randrange(0,sum)
+
+        counter = 0
+        for j in cumulative
+          if j > num_choice
+            return words[counter]
+          else
+            counter += 1
+
+
         pass
 
     def getNextToken(self, sentence):
