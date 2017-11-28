@@ -78,3 +78,4 @@ if __name__ == '__main__':
     print(unigramModel)
     unigramModel.trainModel(text)
     print(unigramModel.nGramCounts)
+    print (unigramModel.getCandidateDictionary(sentence))

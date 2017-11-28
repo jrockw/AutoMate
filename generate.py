@@ -94,6 +94,12 @@ def selectNGramModel(models, sentence):
               (Remember that you wrote a function that checks if a model can
               be used to pick a word for a sentence!)
     """
+    i = 0
+    while i < len(models):
+      if models[i].trainingDataHasNGram(sentence): 
+        return models[i]
+      i = i + 1
+    return models[-1]
     pass
 
 def generateLyricalSentence(models, desiredLength):
