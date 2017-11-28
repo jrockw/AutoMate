@@ -91,10 +91,6 @@ class TrigramModel(NGramModel):
             if sentence[-1] in self.nGramCounts[sentence[-2]]:
               for i in self.nGramCounts[sentence[-2]][sentence[-1]]:
                 D[i] = self.nGramCounts[sentence[-2]][sentence[-1]][i]
-=======
-          if i == sentence[len(sentence) - 2]:
-            D[i] = sentence[i]
->>>>>>> f61676ab0fa5315ae435bf40ff55895df5a2e3c4
         return D
         pass
 
@@ -121,13 +117,12 @@ if __name__ == '__main__':
     '''
     print 'Testing trainingDataHasNGram'
     print trigramModel.nGramCounts
-<<<<<<< HEAD
+
     print trigramModel.trainingDataHasNGram(sentence)
     sentence3 = ['the', 'quick']
     print trigramModel.getCandidateDictionary(sentence3)
-=======
+
     sentence2 = ['the', 'quick', 'b']
     print trigramModel.trainingDataHasNGram(sentence2)
->>>>>>> f61676ab0fa5315ae435bf40ff55895df5a2e3c4
 
 

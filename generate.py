@@ -9,7 +9,6 @@ from models.musicInfo import *
 from models.unigramModel import *
 from models.bigramModel import *
 from models.trigramModel import *
-
 # FIXME Add your team name
 TEAM = 'YOUR NAME HERE'
 LYRICSDIRS = ['the_beatles']
