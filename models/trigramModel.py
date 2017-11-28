@@ -119,10 +119,21 @@ if __name__ == '__main__':
     print trigramModel.nGramCounts
 
     print trigramModel.trainingDataHasNGram(sentence)
-    sentence3 = ['the', 'quick']
-    print trigramModel.getCandidateDictionary(sentence3)
-
-    sentence2 = ['the', 'quick', 'b']
+    sentence2 = ['the', 'quick']
     print trigramModel.trainingDataHasNGram(sentence2)
+
+    '''
+    Testing getCandidateDictionary
+    '''
+    text2 = [ ['the', 'quick', 'brown', 'fox'], ['the', 'quick', 'brown'], ['the', 'quick', 'green'] ]
+    sentence3 = [ 'the', 'quick', 'brown']
+    text.append(sentence)
+
+    '''Testing trainModel'''
+    print 'Testin Train Model'
+    trigramModel = TrigramModel()
+    trigramModel.trainModel(text2)
+    print trigramModel.getCandidateDictionary(sentence3)
+    print trigramModel.getCandidateDictionary(sentence2)
 
 
