@@ -54,6 +54,10 @@ class BigramModel(NGramModel):
                   the next token for the sentence. For explanations of how this
                   is determined for the BigramModel, see the spec.
         """
+        for i in self.nGramCounts:
+          if i == sentence[len(sentence) - 1]:
+            return True
+        return False
         pass
 
     def getCandidateDictionary(self, sentence):
@@ -75,9 +79,10 @@ if __name__ == '__main__':
     # Add your test cases here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     text.append([ 'quick', 'brown' ])
-    sentence = [ 'lazy', 'quick' ]
+    sentence = [ 'quick', 'lazy']
     bigramModel = BigramModel()
     print(bigramModel)
     bigramModel.trainModel(text)
     print bigramModel.nGramCounts
+    print bigramModel.trainingDataHasNGram(sentence)
 
