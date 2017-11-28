@@ -63,7 +63,7 @@ class UnigramModel(NGramModel):
                   to the current sentence. For details on which words the
                   UnigramModel sees as candidates, see the spec.
         """
-        
+        return self.nGramCounts
         pass
 
 ###############################################################################

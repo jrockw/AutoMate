@@ -73,6 +73,11 @@ class TrigramModel(NGramModel):
                   to the current sentence. For details on which words the
                   TrigramModel sees as candidates, see the spec.
         """
+        D = {}
+        for i in self.nGramCounts:
+          if i == sentence[len(sentence) - 2]:
+            D[i] = sentence[i]
+        return D
         pass
 
 
