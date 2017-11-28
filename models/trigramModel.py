@@ -29,7 +29,26 @@ class TrigramModel(NGramModel):
                   symbols to be included as their own tokens in
                   self.nGramCounts. For more details, see the spec.
         """
-        pass
+        self.nGramCounts = {}
+        text = self.prepData(text)
+        for a in text:
+            for i in range(0,len(a)-2):
+
+                if (a[i] in self.nGramCounts): 
+
+                    if(a[i+1] in self.nGramCounts[a[i]]):
+                        if(a[i+2] in self.nGramCounts[a[i]][a[i+1]]):
+                            self.nGramCounts[a[i]][a[i+1]][a[i+2]] += 1
+                        else:
+                            self.nGramCounts[a[i]][a[i+1]][a[i+2]] = 1
+                    else:
+                        self.nGramCounts[a[i]][a[i+1]] = {}
+                        self.nGramCounts[a[i]][a[i+1]][a[i+2]] = 1
+
+                else :
+                    self.nGramCounts[a[i]] = {}
+                    self.nGramCounts[a[i]][a[i+1]] = {}
+                    self.nGramCounts[a[i]][a[i+1]][a[i+2]] = 1
 
     def trainingDataHasNGram(self, sentence):
         """
@@ -62,7 +81,11 @@ if __name__ == '__main__':
     # Add your tests here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     sentence = [ 'the', 'quick', 'brown' ]
+    text.append(sentence)
     trigramModel = TrigramModel()
     print(trigramModel)
+    print text
+    trigramModel.trainModel(text)
+    print trigramModel.nGramCounts
 
 

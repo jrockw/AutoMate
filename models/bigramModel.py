@@ -69,6 +69,8 @@ class BigramModel(NGramModel):
                   to the current sentence. For details on which words the
                   BigramModel sees as candidates, see the spec.
         """
+        n = len(sentence)
+        sentence(n-1)
         pass
 
 ###############################################################################
@@ -79,7 +81,7 @@ if __name__ == '__main__':
     # Add your test cases here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     text.append([ 'quick', 'brown' ])
-    sentence = [ 'quick', 'lazy']
+    sentence = [ 'lazy', 'quick']
     bigramModel = BigramModel()
     print(bigramModel)
     bigramModel.trainModel(text)
