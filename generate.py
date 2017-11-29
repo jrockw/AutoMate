@@ -199,7 +199,7 @@ def runMusicGenerator(models, songName):
 
     possiblePitches = KEY_SIGNATURES[random.choice(KEY_SIGNATURES.keys())]
     tuplesList = tuple(generateMusicalSentence(models, desiredLength, possiblePitches))
-    print tuplesList
+    #print tuplesList
     pysynth.make_wav(tuplesList, fn=songName)
 
 
