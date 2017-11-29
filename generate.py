@@ -182,9 +182,15 @@ def runLyricsGenerator(models):
     chorusDesiredLength = 7
 
     for i in range(0,4):
+<<<<<<< HEAD
       verseOne.append(generateLyricalSentence(models, verse1DesiredLength))
       verseTwo.append(generateLyricalSentence(models, verse1DesiredLength))
       chorus.append(generateLyricalSentence(models, chorusDesiredLength)) #sentences in chorus can be shorter
+=======
+      verseOne.append(generateLyricalSentence(models, 15))
+      verseTwo.append(generateLyricalSentence(models, 10))
+      chorus.append(generateLyricalSentence(models, 9)) #sentences in chorus can be shorter
+>>>>>>> caf7fb189d5f47ee93ba9a0f2f82cbf1ac0eb25c
       printSongLyrics(verseOne, verseTwo, chorus)
 
     pass
