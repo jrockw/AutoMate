@@ -151,12 +151,14 @@ def generateMusicalSentence(models, desiredLength, possiblePitches):
     sentence = ['^::^', '^:::^']
     currentLength = 0
     while True:
-        if(sentenceTooLong(desiredLength, currentLength)):
-            sentence.append('$:::$')
-            return sentence
 
         if (sentence[-1] == '$:::$'):
-            return sentence
+            return sentence[2:-1]
+
+        if(sentenceTooLong(desiredLength, currentLength)):
+            sentence.append('$:::$')
+            return sentence[2:-1]
+
 
         sentence.append( selectNGramModel(models, sentence).getNextNote(sentence, possiblePitches))
         currentLength +=1
@@ -193,7 +195,13 @@ def runMusicGenerator(models, songName):
     Modifies: nothing
     Effects:  runs the music generator as following the details in the spec.
     """
-    pass
+    desiredLength = 15
+
+    possiblePitches = KEY_SIGNATURES[random.choice(KEY_SIGNATURES.keys())]
+    tuplesList = tuple(generateMusicalSentence(models, desiredLength, possiblePitches))
+    print tuplesList
+    pysynth.make_wav(tuplesList, fn=songName)
+
 
 ###############################################################################
 # Reach
@@ -217,7 +225,7 @@ def main():
     # FIXME uncomment these lines when ready
     print('Starting program and loading data...')
     lyricsModels = trainLyricsModels(LYRICSDIRS)
-    #musicModels = trainMusicModels(MUSICDIRS)
+    musicModels = trainMusicModels(MUSICDIRS)
     print('Data successfully loaded')
 
     print('Welcome to the ' + TEAM + ' music generator!')
@@ -230,9 +238,9 @@ def main():
                 #print("Under construction")
             elif userInput == 2:
                 # FIXME uncomment these lines when ready
-                # songName = raw_input('What would you like to name your song? ')
-                # runMusicGenerator(musicModels, WAVDIR + songName + '.wav')
-                print("Under construction")
+                songName = raw_input('What would you like to name your song? ')
+                runMusicGenerator(musicModels, WAVDIR + songName + '.wav')
+                #print("Under construction")
             elif userInput == 3:
                 print('Thank you for using the ' + TEAM + ' music generator!')
                 sys.exit()
