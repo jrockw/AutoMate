@@ -146,19 +146,11 @@ class NGramModel(object):
                   For details on how to do this and how this will differ
                   from getNextToken, see the spec.
         """
-<<<<<<< HEAD
         allCandidates = self.getCandidateDictionary(musicalSentence)
         constrainedCandidates = {}
         for i in allCandidates:
           for j in possiblePitches:
-            if possiblePitches[j].startswith(allCandidates[i]):
-=======
-        allCandidates = self.getCandidateDictionary(possiblePitches)
-        constrainedCandidates = {}
-        for i in allCandidates:
-          for j in musicalSentence:
             if j.startswith(allCandidates[i]):
->>>>>>> 20a14989105c7d5770874344cde273fc0a9f6fc4
               constrainedCandidates[i] = allCandidates[i]
           if i == '$:::$':
             constrainedCandidates[i] = allCandidates[i]
