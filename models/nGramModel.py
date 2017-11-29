@@ -150,7 +150,7 @@ class NGramModel(object):
         constrainedCandidates = {}
         for i in allCandidates:
           for j in musicalSentence:
-            if musicalSentence[j].startswith(allCandidates[i]):
+            if j.startswith(allCandidates[i]):
               constrainedCandidates[i] = allCandidates[i]
           if i == '$:::$':
             constrainedCandidates[i] = allCandidates[i]
