@@ -151,14 +151,12 @@ def generateMusicalSentence(models, desiredLength, possiblePitches):
     sentence = ['^::^', '^:::^']
     currentLength = 0
     while True:
-
-        if (sentence[-1] == '$:::$'):
-            return sentence[2:-1]
-
         if(sentenceTooLong(desiredLength, currentLength)):
             sentence.append('$:::$')
-            return sentence[2:-1]
+            return sentence
 
+        if (sentence[-1] == '$:::$'):
+            return sentence
 
         sentence.append( selectNGramModel(models, sentence).getNextNote(sentence, possiblePitches))
         currentLength +=1
@@ -177,14 +175,11 @@ def runLyricsGenerator(models):
     verseOne = []
     verseTwo = []
     chorus = []
-    verse1DesiredLength = 12
-    verse1DesiredLength = 12
-    chorusDesiredLength = 7
 
     for i in range(0,4):
-      verseOne.append(generateLyricalSentence(models, verse1DesiredLength))
-      verseTwo.append(generateLyricalSentence(models, verse1DesiredLength))
-      chorus.append(generateLyricalSentence(models, chorusDesiredLength)) #sentences in chorus can be shorter
+      verseOne.append(generateLyricalSentence(models, 12))
+      verseTwo.append(generateLyricalSentence(models, 12))
+      chorus.append(generateLyricalSentence(models, 7)) #sentences in chorus can be shorter
       printSongLyrics(verseOne, verseTwo, chorus)
 
     pass
@@ -195,13 +190,7 @@ def runMusicGenerator(models, songName):
     Modifies: nothing
     Effects:  runs the music generator as following the details in the spec.
     """
-    desiredLength = 15
-
-    possiblePitches = KEY_SIGNATURES[random.choice(KEY_SIGNATURES.keys())]
-    tuplesList = tuple(generateMusicalSentence(models, desiredLength, possiblePitches))
-    #print tuplesList
-    pysynth.make_wav(tuplesList, fn=songName)
-
+    pass
 
 ###############################################################################
 # Reach
@@ -225,7 +214,7 @@ def main():
     # FIXME uncomment these lines when ready
     print('Starting program and loading data...')
     lyricsModels = trainLyricsModels(LYRICSDIRS)
-    musicModels = trainMusicModels(MUSICDIRS)
+    #musicModels = trainMusicModels(MUSICDIRS)
     print('Data successfully loaded')
 
     print('Welcome to the ' + TEAM + ' music generator!')
@@ -238,9 +227,9 @@ def main():
                 #print("Under construction")
             elif userInput == 2:
                 # FIXME uncomment these lines when ready
-                songName = raw_input('What would you like to name your song? ')
-                runMusicGenerator(musicModels, WAVDIR + songName + '.wav')
-                #print("Under construction")
+                # songName = raw_input('What would you like to name your song? ')
+                # runMusicGenerator(musicModels, WAVDIR + songName + '.wav')
+                print("Under construction")
             elif userInput == 3:
                 print('Thank you for using the ' + TEAM + ' music generator!')
                 sys.exit()
