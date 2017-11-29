@@ -146,7 +146,7 @@ class NGramModel(object):
                   For details on how to do this and how this will differ
                   from getNextToken, see the spec.
         """
-        allCandidates = self.getCandidateDictionary(posiblePitches)
+        allCandidates = self.getCandidateDictionary(possiblePitches)
         constrainedCandidates = {}
         for i in allCandidates:
           for j in musicalSentence:
