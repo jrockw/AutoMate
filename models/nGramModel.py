@@ -147,12 +147,14 @@ class NGramModel(object):
                   from getNextToken, see the spec.
         """
         allCandidates = self.getCandidateDictionary(musicalSentence)
+        #print 'possiblePitches:', possiblePitches
+        #print allCandidates
         constrainedCandidates = {}
-        for i in allCandidates:
+        for i in allCandidates.keys():
           for j in possiblePitches:
-            if j.startswith(allCandidates[i]):
+            if i[0].startswith(j):
               constrainedCandidates[i] = allCandidates[i]
-          if i == '$:::$':
+          if i[0] == '$:::$':
             constrainedCandidates[i] = allCandidates[i]
         if constrainedCandidates != {}:
           return self.weightedChoice(constrainedCandidates)
