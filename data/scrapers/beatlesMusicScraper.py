@@ -59,17 +59,17 @@ class VGMusicScraper(BaseScraper):
             subprocess.call("mkdir " + midiDir, shell=True)
 
         html = self.getPageHtml(path)
+        #print html
+        
         midiPattern = re.compile('"(.*?.mid)"')
         midiMatches = re.findall(midiPattern, html)
-
-        if len(os.listdir(midiDir)) == len(midiMatches):
-            return
 
         print "Found", len(midiMatches), "midi files for", self.fullPlatform
         progress = 0
         for match in midiMatches:
             progress = self.updateProgressBar(progress, match, len(midiMatches))
-            url = "http://" + self.hostUrl + "/" + path + "/" + match
+            url = "http://" + self.hostUrl +  "/" + match
+            print url
             try:
                 response = urllib2.urlopen(url)
                 midiFile = midiDir + "/" + match
@@ -79,6 +79,7 @@ class VGMusicScraper(BaseScraper):
                 pass
 
         print "\nScraped data for", self.fullPlatform, "successfully\n"
+
 
     def convertMidiToAscii(self, midiDir):
         """
@@ -101,18 +102,21 @@ class VGMusicScraper(BaseScraper):
                 midiFile = midiDir + "/" + midiFile
                 midiTextFile = midiFile[:-4] + ".txt"
 
-                convertCommand = "../midi/mid2asc " + midiFile + \
+                convertCommand = "../midi/a.out " + midiFile + \
                                  " > " + midiTextFile
                 FNULL = open(os.devnull, "w")
                 returnCode = subprocess.call(convertCommand, stdout=FNULL, \
                                              stderr=subprocess.STDOUT, \
                                              shell=True)
+                
                 removeCommand = "rm " + midiFile
                 subprocess.call(removeCommand, shell=True)
 
+                print 'returnCode', returnCode
                 if returnCode != 0:
                     removeCommand = "rm " + midiTextFile
                     subprocess.call(removeCommand, shell=True)
+                
 
         print "\nConverted all midi files in", self.fullPlatform,
         print "directory to .txt files"
@@ -122,6 +126,6 @@ if __name__ == "__main__":
     scraper = VGMusicScraper()
     platform = 'beatles'
     path = 'midi.html'
-    scraper.scrape(platform, path)
-    #scraper.convertMidiToAscii("../midi/" + platform)
+    #scraper.scrape(platform, path)
+    scraper.convertMidiToAscii("../midi/" + platform)
 
