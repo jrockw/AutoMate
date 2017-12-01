@@ -59,8 +59,8 @@ class TrigramModel(NGramModel):
                   is determined for the TrigramModel, see the spec.
         """
         if sentence[-2] in self.nGramCounts:
-          if sentence[-1] in self.nGramCounts[sentence[-2]]:
-            return True
+            if sentence[-1] in self.nGramCounts[sentence[-2]]:
+                return True
         return False
         pass
 
@@ -103,37 +103,45 @@ if __name__ == '__main__':
     # Add your tests here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     sentence = [ 'the', 'quick', 'brown']
-    text.append(sentence)
-
+    sentence2 = [ 'the', 'fat', 'bat']
+    sentence3 = ['the', 'quick']
+    
     '''Testing trainModel'''
-    print 'Testin Train Model'
+    print 'Testing trigram trainModel'
     trigramModel = TrigramModel()
     print(trigramModel)
-    print text
+    
+    print 'Test 1'
     trigramModel.trainModel(text)
+    print trigramModel.nGramCounts
+
+    print 'Test 2'
+    text.append(sentence)
+    trigramModel.trainModel(text)
+    print trigramModel.nGramCounts
+
+    print 'Test 3'
+    text.append(sentence2)
+    trigramModel.trainModel(text)
+    print trigramModel.nGramCounts
 
     '''
     Testing trainingDataHasNGram
     '''
-    print 'Testing trainingDataHasNGram'
-    print trigramModel.nGramCounts
+    print 'Testing trigram trainingDataHasNGram'
 
+    print 'Test 1'
+    print 'Test 1 should return True'
     print trigramModel.trainingDataHasNGram(sentence)
-    sentence2 = ['the', 'quick']
+
+    print 'Test 2'
+    print 'Test 2 should return False'
     print trigramModel.trainingDataHasNGram(sentence2)
 
     '''
     Testing getCandidateDictionary
     '''
     text2 = [ ['the', 'quick', 'brown', 'fox'], ['the', 'quick', 'brown'], ['the', 'quick', 'green'] ]
-    sentence3 = [ 'the', 'quick', 'brown']
+    
     text.append(sentence)
-
-    '''Testing trainModel'''
-    print 'Testin Train Model'
-    trigramModel = TrigramModel()
-    trigramModel.trainModel(text2)
-    print trigramModel.getCandidateDictionary(sentence3)
-    print trigramModel.getCandidateDictionary(sentence2)
-
 

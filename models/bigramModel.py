@@ -55,7 +55,7 @@ class BigramModel(NGramModel):
                   is determined for the BigramModel, see the spec.
         """
         for i in self.nGramCounts:
-          if i == sentence[len(sentence) - 1]:
+          if i == sentence[-1]:
             return True
         return False
         pass
@@ -83,13 +83,31 @@ class BigramModel(NGramModel):
 if __name__ == '__main__':
     # Add your test cases here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    text.append([ 'quick', 'brown' ])
-    sentence = [ 'lazy', 'quick']
+    sentence1 = [ 'quick', 'brown' ]
+    sentence2 = [ 'lazy', 'quick']
+    sentence3 = ['brown', 'fox']
+    sentence4 = ['quick', 'fat']
     bigramModel = BigramModel()
     print(bigramModel)
+
+    print 'Testing bigram trainModel'
+
+    print 'Test 1'
     bigramModel.trainModel(text)
     print bigramModel.nGramCounts
-    print bigramModel.trainingDataHasNGram(sentence)
+
+    print 'Test 2'
+    text.append(sentence1)
+    bigramModel.trainModel(text)
+    print bigramModel.nGramCounts
+
+    print 'Test 3'
+    text.append(sentence2)
+    bigramModel.trainModel(text)
+    print bigramModel.nGramCounts
+
+
+    print bigramModel.trainingDataHasNGram(sentence1)
     sentence3 = ['the']
     print bigramModel.getCandidateDictionary(sentence3)
     song4_lh = [
@@ -107,4 +125,42 @@ if __name__ == '__main__':
     keys_s = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#']
     bigramMusic = BigramModel()
     print bigramMusic.getNextNote(song4_lh, keys_s)
+
+    print 'Testing bigram trainingDataHasNGram'
+
+    print 'Test 1'
+    print 'Test 1 should return True'
+    print bigramModel.trainingDataHasNGram(sentence1)
+
+    print 'Test 2'
+    print 'Test 2 should return False'
+    print bigramModel.trainingDataHasNGram(sentence4)
+    
+    print 'Test 3'
+    print 'Test 3 should return True'
+    print bigramModel.trainingDataHasNGram(sentence3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
