@@ -83,13 +83,29 @@ class BigramModel(NGramModel):
 if __name__ == '__main__':
     # Add your test cases here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    text.append([ 'quick', 'brown' ])
-    sentence = [ 'lazy', 'quick']
+    sentence1 = [ 'quick', 'brown' ]
+    sentence2 = [ 'lazy', 'quick']
     bigramModel = BigramModel()
     print(bigramModel)
+
+    print 'Testing bigram trainModel'
+
+    print 'Test 1'
     bigramModel.trainModel(text)
     print bigramModel.nGramCounts
-    print bigramModel.trainingDataHasNGram(sentence)
+
+    print 'Test 2'
+    text.append(sentence1)
+    bigramModel.trainModel(text)
+    print bigramModel.nGramCounts
+
+    print 'Test 3'
+    text.append(sentence2)
+    bigramModel.trainModel(text)
+    print bigramModel.nGramCounts
+
+
+    print bigramModel.trainingDataHasNGram(sentence1)
     sentence3 = ['the']
     print bigramModel.getCandidateDictionary(sentence3)
 

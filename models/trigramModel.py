@@ -103,14 +103,27 @@ if __name__ == '__main__':
     # Add your tests here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     sentence = [ 'the', 'quick', 'brown']
-    text.append(sentence)
-
+    sentence2 = [ 'the', 'lazy', 'dog']
+    sentence3 = ['the', 'quick']
+    
     '''Testing trainModel'''
-    print 'Testin Train Model'
+    print 'Testing trigram trainModel'
     trigramModel = TrigramModel()
     print(trigramModel)
-    print text
+    
+    print 'Test 1'
     trigramModel.trainModel(text)
+    print trigramModel.nGramCounts
+
+    print 'Test 2'
+    text.append(sentence)
+    trigramModel.trainModel(text)
+    print trigramModel.nGramCounts
+
+    print 'Test 3'
+    text.append(sentence2)
+    trigramModel.trainModel(text)
+    print trigramModel.nGramCounts
 
     '''
     Testing trainingDataHasNGram
@@ -119,21 +132,13 @@ if __name__ == '__main__':
     print trigramModel.nGramCounts
 
     print trigramModel.trainingDataHasNGram(sentence)
-    sentence2 = ['the', 'quick']
+    
     print trigramModel.trainingDataHasNGram(sentence2)
 
     '''
     Testing getCandidateDictionary
     '''
     text2 = [ ['the', 'quick', 'brown', 'fox'], ['the', 'quick', 'brown'], ['the', 'quick', 'green'] ]
-    sentence3 = [ 'the', 'quick', 'brown']
+    
     text.append(sentence)
-
-    '''Testing trainModel'''
-    print 'Testin Train Model'
-    trigramModel = TrigramModel()
-    trigramModel.trainModel(text2)
-    print trigramModel.getCandidateDictionary(sentence3)
-    print trigramModel.getCandidateDictionary(sentence2)
-
 

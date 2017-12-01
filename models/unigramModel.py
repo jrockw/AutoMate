@@ -74,8 +74,25 @@ if __name__ == '__main__':
     # Add your test cases here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     sentence = [ 'brown' ]
+    sentence2 = ['brown', 'the', 'lazy']
     unigramModel = UnigramModel()
     print(unigramModel)
+
+    print 'Testing unigram trainModel'
+
+    print 'Test 1'
     unigramModel.trainModel(text)
-    print(unigramModel.nGramCounts)
+    print unigramModel.nGramCounts
+
+    print 'Test 2'
+    text.append(sentence)
+    unigramModel.trainModel(text)
+    print unigramModel.nGramCounts
+
+    print 'Test 3'
+    text.append(sentence2)
+    unigramModel.trainModel(text)
+    print unigramModel.nGramCounts
+
+    print 'Testing getCandidateDictionary'
     print (unigramModel.getCandidateDictionary(sentence))
