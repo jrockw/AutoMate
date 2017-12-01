@@ -59,8 +59,8 @@ class TrigramModel(NGramModel):
                   is determined for the TrigramModel, see the spec.
         """
         if sentence[-2] in self.nGramCounts:
-          if sentence[-1] in self.nGramCounts[sentence[-2]]:
-            return True
+            if sentence[-1] in self.nGramCounts[sentence[-2]]:
+                return True
         return False
         pass
 
@@ -103,7 +103,7 @@ if __name__ == '__main__':
     # Add your tests here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     sentence = [ 'the', 'quick', 'brown']
-    sentence2 = [ 'the', 'lazy', 'dog']
+    sentence2 = [ 'the', 'fat', 'bat']
     sentence3 = ['the', 'quick']
     
     '''Testing trainModel'''
@@ -128,11 +128,14 @@ if __name__ == '__main__':
     '''
     Testing trainingDataHasNGram
     '''
-    print 'Testing trainingDataHasNGram'
-    print trigramModel.nGramCounts
+    print 'Testing trigram trainingDataHasNGram'
 
+    print 'Test 1'
+    print 'Test 1 should return True'
     print trigramModel.trainingDataHasNGram(sentence)
-    
+
+    print 'Test 2'
+    print 'Test 2 should return False'
     print trigramModel.trainingDataHasNGram(sentence2)
 
     '''

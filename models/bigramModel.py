@@ -55,7 +55,7 @@ class BigramModel(NGramModel):
                   is determined for the BigramModel, see the spec.
         """
         for i in self.nGramCounts:
-          if i == sentence[len(sentence) - 1]:
+          if i == sentence[-1]:
             return True
         return False
         pass
@@ -85,6 +85,8 @@ if __name__ == '__main__':
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
     sentence1 = [ 'quick', 'brown' ]
     sentence2 = [ 'lazy', 'quick']
+    sentence3 = ['brown', 'fox']
+    sentence4 = ['quick', 'fat']
     bigramModel = BigramModel()
     print(bigramModel)
 
@@ -108,4 +110,42 @@ if __name__ == '__main__':
     print bigramModel.trainingDataHasNGram(sentence1)
     sentence3 = ['the']
     print bigramModel.getCandidateDictionary(sentence3)
+
+    print 'Testing bigram trainingDataHasNGram'
+
+    print 'Test 1'
+    print 'Test 1 should return True'
+    print bigramModel.trainingDataHasNGram(sentence1)
+
+    print 'Test 2'
+    print 'Test 2 should return False'
+    print bigramModel.trainingDataHasNGram(sentence4)
+    
+    print 'Test 3'
+    print 'Test 3 should return True'
+    print bigramModel.trainingDataHasNGram(sentence3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
