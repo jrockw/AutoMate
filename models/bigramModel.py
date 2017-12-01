@@ -92,4 +92,19 @@ if __name__ == '__main__':
     print bigramModel.trainingDataHasNGram(sentence)
     sentence3 = ['the']
     print bigramModel.getCandidateDictionary(sentence3)
+    song4_lh = [
+    ('g2', 8), ('f#2', 8),
+    ('e2*', 4), ('a2', 4), ('b2', 4), ('a2', 4),
+    ('g2*', 4), ('f#2', 4), ('e2', 4), ('f#2', 4),
+    ('g2*', 4), ('a2', 4), ('b2', 4), ('a2', 4),
+    ('g2*', 4), ('b2', 4), ('e2', 8), ('f#2', 8), ('g2', 8), ('f#2', 8),
+    ('e2*', 4), ('a2', 4), ('b2', 4), ('a2', 4),
+    ('g2*', 4), ('f#2', 4), ('e2', 4), ('f#2', 4),
+    ('g2*', 4), ('c3', 4), ('d3', 4), ('d3', 4),
+    ('b2*', -2),
+    ]
+
+    keys_s = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#']
+    bigramMusic = BigramModel()
+    print bigramMusic.getNextNote(song4_lh, keys_s)
 
