@@ -179,12 +179,12 @@ def runLyricsGenerator(models):
     chorus = []
     verse1DesiredLength = 12
     verse1DesiredLength = 12
-    chorusDesiredLength = 7
+    chorusDesiredLength = 7 #sentences in chorus can be shorter
 
     for i in range(0,4):
       verseOne.append(generateLyricalSentence(models, verse1DesiredLength))
       verseTwo.append(generateLyricalSentence(models, verse1DesiredLength))
-      chorus.append(generateLyricalSentence(models, chorusDesiredLength)) #sentences in chorus can be shorter
+      chorus.append(generateLyricalSentence(models, chorusDesiredLength)) 
       printSongLyrics(verseOne, verseTwo, chorus)
 
     pass
@@ -195,7 +195,7 @@ def runMusicGenerator(models, songName):
     Modifies: nothing
     Effects:  runs the music generator as following the details in the spec.
     """
-    desiredLength = 15
+    desiredLength = 50
 
     possiblePitches = KEY_SIGNATURES[random.choice(KEY_SIGNATURES.keys())]
     tuplesList = tuple(generateMusicalSentence(models, desiredLength, possiblePitches))
