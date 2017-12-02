@@ -140,8 +140,21 @@ if __name__ == '__main__':
     print 'Test 3 should return True'
     print bigramModel.trainingDataHasNGram(sentence3)
 
+    print "\nTesting getNextToken"
+    testSentence1 = "Apples are really tasty and apples are really good especially when apples"
+    testSentence2 = "I like to run and jog and swim and jog in the weather outside"
+    testSentence3 = "Mountains have caves in them and lots of snow in the winter caves caves"
+    print "\nTesting Sentence 1"
+    for p in range(0,7):
+      print bigramModel.getNextToken(testSentence1)
 
+    print "\nTesting Sentence 2"
+    for p in range(0,7):
+      print bigramModel.getNextToken(testSentence2)
 
+    print "\nTesting Sentence 3"
+    for p in range(0,7):
+      print bigramModel.getNextToken(testSentence3)
 
 
 
