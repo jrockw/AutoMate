@@ -257,49 +257,27 @@ if __name__ == '__main__':
     # you can comment out main() and call those functions here. Just make
     # sure to call main() in your final submission of the project!
     '''
+    #TESTING
+
     print "Testing runLyricsGenerator"
     lyricsModels = trainLyricsModels(LYRICSDIRS)
     runLyricsGenerator(lyricsModels)
-<<<<<<< HEAD
+
+    print "Testing selectNGramModel"
+    print 'Test case 1'
+    sentence1 = [ 'the', 'quick', 'brown']
+    print selectNGramModel(lyricsModels, sentence1)
+
+    print "Test case 2"
+    sentence2 = ['yellow', 'submarine'] 
+    print selectNGramModel(lyricsModels, sentence2)
+
+    print 'Testing generateLyricalSentence'
+    print 'Test case 1'
+    print generateLyricalSentence(lyricsModels, 5)
+
+    print 'Test case 2'
+    print generateLyricalSentence(lyricsModels, 7)
     '''
-=======
-
-    print "Testing selectNGramModel"
-    print 'Test case 1'
-    sentence1 = [ 'the', 'quick', 'brown']
-    print selectNGramModel(lyricsModels, sentence1)
-
-    print "Test case 2"
-    sentence2 = ['yellow', 'submarine'] 
-    print selectNGramModel(lyricsModels, sentence2)
-
-    print 'Testing generateLyricalSentence'
-    print 'Test case 1'
-    print generateLyricalSentence(lyricsModels, 5)
-
-<<<<<<< HEAD
-    print 'Test case 2'
-    print generateLyricalSentence(lyricsModels, 7)
->>>>>>> 8976049ade5fc56f1ea4b3eda13b77b9312e85a1
-=======
-    print "Testing selectNGramModel"
-    print 'Test case 1'
-    sentence1 = [ 'the', 'quick', 'brown']
-    print selectNGramModel(lyricsModels, sentence1)
-
-    print "Test case 2"
-    sentence2 = ['yellow', 'submarine'] 
-    print selectNGramModel(lyricsModels, sentence2)
-
-    print 'Testing generateLyricalSentence'
-    print 'Test case 1'
-    print generateLyricalSentence(lyricsModels, 5)
-
-    print 'Test case 2'
-    print generateLyricalSentence(lyricsModels, 7)
->>>>>>> 8976049ade5fc56f1ea4b3eda13b77b9312e85a1
-
-
-
 
 
