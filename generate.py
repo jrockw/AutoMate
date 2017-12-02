@@ -262,6 +262,21 @@ if __name__ == '__main__':
     lyricsModels = trainLyricsModels(LYRICSDIRS)
     runLyricsGenerator(lyricsModels)
 
+    print "Testing selectNGramModel"
+    print 'Test case 1'
+    sentence1 = [ 'the', 'quick', 'brown']
+    print selectNGramModel(lyricsModels, sentence1)
+
+    print "Test case 2"
+    sentence2 = ['yellow', 'submarine'] 
+    print selectNGramModel(lyricsModels, sentence2)
+
+    print 'Testing generateLyricalSentence'
+    print 'Test case 1'
+    print generateLyricalSentence(lyricsModels, 5)
+
+    print 'Test case 2'
+    print generateLyricalSentence(lyricsModels, 7)
 
 
 
