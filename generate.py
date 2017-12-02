@@ -212,7 +212,7 @@ PROMPT = """
 (2) Generate a song using data from Nintendo Gamecube
 (3) Quit the music generator
 > """
-
+'''
 def main():
     """
     Requires: Nothing
@@ -248,9 +248,22 @@ def main():
                 print("Invalid option!")
         except ValueError:
             print("Please enter a number")
+'''
 
 if __name__ == '__main__':
+    '''
     main()
+    '''
     # note that if you want to individually test functions from this file,
     # you can comment out main() and call those functions here. Just make
     # sure to call main() in your final submission of the project!
+
+    print "Testing runLyricsGenerator"
+    lyricsModels = trainLyricsModels(LYRICSDIRS)
+    runLyricsGenerator(lyricsModels)
+
+
+
+
+
+
