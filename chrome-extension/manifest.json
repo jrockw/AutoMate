@@ -1,0 +1,35 @@
+{
+	"manifest_version": 2,
+    "name": "JackBot",
+    "version": "0.1",
+    "content_scripts": [
+    {
+        "matches": [
+        "<all_urls>"
+      ],
+      "js": ["jquery-2.2.4.min.js", "content.js"]
+    }
+    ],
+    "browser_action": {
+    	"default_icon": "jack.png"
+    },
+    "background": {
+  		"scripts": ["background.js"]
+	},
+	"permissions": [
+          "input"
+    ],
+    "input_components": [
+    {
+      "name": "Test IME",
+      "type": "ime",
+      "id": "test",
+      "description": "Test IME",  // A user visible description
+      "language": "en-US",  // The primary language this IME is used for
+      "layouts": ["us::eng"]  // The supported keyboard layouts for this IME
+    }
+  ]
+
+
+
+}
