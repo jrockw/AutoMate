@@ -13,7 +13,7 @@ from models.trigramModel import *
 TEAM = 'trAIn'
 LYRICSDIRS = ['the_beatles']
 MUSICDIRS = ['gamecube']
-CONVERDIRS = ['Data']
+CONVERDIRS = ['new_data']
 WAVDIR = 'wav/'
 
 ###############################################################################
@@ -234,8 +234,8 @@ def main():
     """
     # FIXME uncomment these lines when ready
     print('Starting program and loading data...')
-    lyricsModels = trainLyricsModels(LYRICSDIRS)
-    musicModels = trainMusicModels(MUSICDIRS)
+   #lyricsModels = trainLyricsModels(LYRICSDIRS)
+   # musicModels = trainMusicModels(MUSICDIRS)
     converModels = trainConversationModels(CONVERDIRS)
     print('Data successfully loaded')
     print('Welcome to the ' + TEAM + ' music generator!')
