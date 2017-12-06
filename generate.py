@@ -234,7 +234,7 @@ def main():
     """
     # FIXME uncomment these lines when ready
     print('Starting program and loading data...')
-   #lyricsModels = trainLyricsModels(LYRICSDIRS)
+    lyricsModels = trainLyricsModels(LYRICSDIRS)
    # musicModels = trainMusicModels(MUSICDIRS)
     converModels = trainConversationModels(CONVERDIRS)
     print('Data successfully loaded')
@@ -244,7 +244,8 @@ def main():
             userInput = int(raw_input(PROMPT))
             if userInput == 1:
                 # FIXME uncomment this line when ready
-                runLyricsGenerator(lyricsModels)
+                #runLyricsGenerator(lyricsModels)
+                runLyricsGenerator(converModels)
                 #print("Under construction")
             elif userInput == 2:
                 # FIXME uncomment these lines when ready
