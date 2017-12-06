@@ -174,8 +174,6 @@ if __name__ == '__main__':
     choices = { 'the': 2, 'quick': 1, 'brown': 1 }
     nGramModel = NGramModel()
     print(nGramModel)
-
-
     print "Testing weightedChoice"
     testDict = { "red" : 4, "orange" : 3, "green" : 2, "blue" : 1 }
     ctRed = 0 

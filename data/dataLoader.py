@@ -32,6 +32,37 @@ def loadLyrics(dirName):
                 lyrics.append(line.split())
     return lyrics
 
+
+def loadConvers(dirName):
+    """
+    Loads the conversation files from the directory specified by dirName,
+    if that directory exists. For each line in each file,
+    cleans that line by removing punctuation and extraneous
+    whitespaces, and lowercasing all words in the line.
+    """
+    lyricsDir = os.path.dirname(os.path.abspath(__file__)) + "/lyrics/"
+    artistDir = os.path.join(lyricsDir, dirName) + "/"
+
+    if not os.path.isdir(artistDir):
+        print "No artist named", artistDir, "in directory", lyricsDir
+        return None
+
+    lyrics = []
+
+    songs = os.listdir(artistDir)
+    for song in songs:
+        with open(artistDir + song, 'r') as songFile:
+            songLines = songFile.readlines()
+
+        # clean each line in each song and add if not empty
+        for line in songLines:
+            line = line.translate(None, string.punctuation)
+            line = line.split(" ", 2)[2]
+            #line = line.lower().strip()
+            if line:
+                lyrics.append(line.split())
+    return lyrics
+
 def loadMusic(dirName):
     """
     Loads the midi files to the specified dirName directory by
@@ -163,6 +194,14 @@ def formatDuration(asciiDuration):
     return duration
 
 if __name__ == "__main__":
-    lyrics = loadLyrics('the_beatles')
-    for line in lyrics:
+    conversations = loadConvers('new_data')
+    for line in conversations:
         print(line)
+
+
+
+
+
+
+
+
