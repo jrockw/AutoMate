@@ -164,6 +164,17 @@ class NGramModel(object):
 
         pass
 
+
+
+
+
+    def getThreeChoices(self, sentence):
+        #returns a list of three words which are the top three
+        #possibilities for the next word given 0-2 of the last words in
+        #the sentence. Function will be overriden in child classes
+        pass
+
+
 ###############################################################################
 # Main
 ###############################################################################

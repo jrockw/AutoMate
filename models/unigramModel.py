@@ -1,5 +1,6 @@
 import random
 from nGramModel import *
+import operator
 
 class UnigramModel(NGramModel):
 
@@ -66,6 +67,23 @@ class UnigramModel(NGramModel):
         return self.nGramCounts
         pass
 
+
+
+    def getThreeChoices(self, sentence):
+        #allChoices = self.getCandidateDictionary #allChoices is a dictionary
+        
+        #For testing
+        allChoices = {"a" : 5, "j" : 12, "f" : 8, "u" : 2, "b" : 20, "k" : 10}
+
+        poss = []
+        sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
+        poss.append(sorted_allChoices[-1][0])
+        poss.append(sorted_allChoices[-2][0])
+        poss.append(sorted_allChoices[-3][0])
+
+        return poss
+
+
 ###############################################################################
 # Main
 ###############################################################################
@@ -130,6 +148,10 @@ if __name__ == '__main__':
     print "\nTesting Sentence 3"
     for p in range(0,7):
       print unigramModel.getNextToken(testSentence3)
+
+
+    print "\nTesting getThreeChoices"
+    print unigramModel.getThreeChoices(testSentence1)
 
 
 
