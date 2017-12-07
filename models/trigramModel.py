@@ -97,7 +97,7 @@ class TrigramModel(NGramModel):
 
 
     def getThreeChoices(self, sentence):
-        allChoices = self.getCandidateDictionary
+        allChoices = self.getCandidateDictionary(sentence)
         poss = []
         sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
         poss.append(sorted_allChoices[-1][0])
