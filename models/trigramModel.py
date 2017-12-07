@@ -1,8 +1,5 @@
 import random
 from nGramModel import *
-from unigramModel import *
-from bigramModel import *
-import operator
 
 class TrigramModel(NGramModel):
 
@@ -100,47 +97,12 @@ class TrigramModel(NGramModel):
 
 
     def getThreeChoices(self, sentence):
+        allChoices = self.getCandidateDictionary
         poss = []
-
-        trigramChoices = self.getCandidateDictionary()
-        sorted_trigramChoices = sorted(trigramChoices.items(), key = operator.itemgetter(1))
-
-        if bigramModel.trainingDataHasNGram():
-            bigramchoices = bigramModel.getCandidateDictionary()
-            sorted_bigramChoices = sorted(bigramChoices.items(), key = operator.itemgetter(1))
-
-        unigramchoices = unigramModel.getCandidateDictionary()
-        sorted_unigramChoices = sorted(unigramChoices.items(), key = operator.itemgetter(1))
-
-        
-        
-        if sorted_allChoices.length() >= 3:
-            poss.append(sorted_trigramChoices[-1][0])
-            poss.append(sorted_trigramChoices[-2][0])
-            poss.append(sorted_trigramChoices[-3][0])
-
-        elif sorted_allChoices.length == 2:
-            poss.append(sorted_trigramChoices[-1][0])
-            poss.append(sorted_trigramChoices[-2][0])
-            if bigramModel.trainingDataHasNGram():
-                poss.append(sorted_bigramChoices[-1][0])
-            else:
-                poss.append(sorted_unigramChoices[-1][0])
-
-        else:
-            poss.append(sorted_trigramChoices[-1][0])
-            if bigramModel.trainingDataHasNGram():
-                if sorted_bigramChoices.length() >= 2:
-                    poss.append(sorted_bigramChoices[-1][0])
-                    poss.append(sorted_bigramChoices[-2][0])
-                else:
-                    poss.append(sorted_bigramChoices[-1][0])
-                    poss.append(sorted_unigramChoices[-1][0])
-            else:
-                poss.append(sorted_unigramChoices[-1][0])
-                poss.append(sorted_unigramChoices[-2][0])
-
-
+        sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
+        poss.append(sorted_allChoices[-1][0])
+        poss.append(sorted_allChoices[-2][0])
+        poss.append(sorted_allChoices[-3][0])
 
         return poss
 
