@@ -76,6 +76,21 @@ class BigramModel(NGramModel):
         return D
         pass
 
+
+
+    def getThreeChoices(self, sentence):
+        allChoices = self.getCandidateDictionary
+        poss = []
+        sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
+        poss.append(sorted_allChoices[-1][0])
+        poss.append(sorted_allChoices[-2][0])
+        poss.append(sorted_allChoices[-3][0])
+
+        return poss
+
+
+        
+
 ###############################################################################
 # Main
 ###############################################################################
