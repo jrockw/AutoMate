@@ -105,7 +105,7 @@ if __name__ == '__main__':
     sentence = [ 'the', 'quick', 'brown']
     sentence2 = [ 'the', 'fat', 'bat']
     sentence3 = ['the', 'quick']
-    
+    sentence3 = ['quick', 'brown', 'fox']
     '''Testing trainModel'''
     print 'Testing trigram trainModel'
     trigramModel = TrigramModel()
@@ -141,7 +141,8 @@ if __name__ == '__main__':
     '''
     Testing getCandidateDictionary
     '''
+    print 'testing getCandidateDictionary'
     text2 = [ ['the', 'quick', 'brown', 'fox'], ['the', 'quick', 'brown'], ['the', 'quick', 'green'] ]
-    
+    print trigramModel.getCandidateDictionary(sentence3)
     text.append(sentence)
 

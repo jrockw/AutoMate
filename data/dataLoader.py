@@ -57,7 +57,7 @@ def loadConvers(dirName):
         # clean each line in each song and add if not empty
         for line in songLines:
             line = line.translate(None, string.punctuation)
-            line = line.split(" ", 2)[2]
+            #line = line.split(" ", 1)[-1]
             #line = line.lower().strip()
             if line:
                 lyrics.append(line.split())

@@ -222,7 +222,7 @@ PROMPT = """
 (2) Generate a song using data from Nintendo Gamecube
 (3) Quit the music generator
 > """
-
+""
 def main():
     """
     Requires: Nothing
@@ -262,7 +262,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #main()
     
     # note that if you want to individually test functions from this file,
     # you can comment out main() and call those functions here. Just make
@@ -290,5 +290,9 @@ if __name__ == '__main__':
     print 'Test case 2'
     print generateLyricalSentence(lyricsModels, 7)
     '''
-
-
+    print 'Hello'
+    #models = trainLyricsModels(LYRICSDIRS)
+    models = trainConversationModels(CONVERDIRS)
+    sentence = ['I', 'like', 'to']
+    print models[0].getCandidateDictionary(sentence)
+    
