@@ -17,28 +17,22 @@ translator = Translator()
 
 #################
 
-# This function is called whenever a key is released
-
+'''
+This function creates the text box to receive user input.
+The  text box is sensitive to keyboard input and 
+'''
 def initializeResponseEntry():
     responseEntry = Text(width=40, height=3)
     responseEntry.insert(END, 'Type here')
-    responseEntry.grid(row=2, sticky=E)
-    responseEntry.bind('<KeyRelease>', typing) 
+    responseEntry.grid(row=2, sticky=EW)
+    responseEntry.bind('<KeyRelease>', typing)
+    responseEntry.bind('<BackSpace>', blankButtons()) 
     responseEntry.bind('<Button-1>', clearText)
     return responseEntry
 
+
 '''
-def initializeLangBox():
-    box = ttk.Combobox(root, textvariable=NATIVE_LANGUAGE, 
-                            state='active')
-    box['value'] = ('English','French', 'Spanish', 'German', 'Italian')
-    box.current(0)
-    print box.get()
-    box.current(1)
-    print box.get()
-    box.grid(column=0, row=0, sticky = EW)
-    box.bind('<<ComboboxSelected>>', selectNativeLanguage(box.get()))
-'''   
+'''
 def initializeLangBox():
     options = ALL_LANGUAGES
     var = StringVar()
@@ -49,37 +43,49 @@ def initializeLangBox():
 
 def updateLangValue(value):
     global NATIVE_LANGUAGE
-    NATIVE_LANGUAGE = value 
-    print 'updateLangValue to '+ NATIVE_LANGUAGE
+    NATIVE_LANGUAGE = value
+    setButtonTexts()
 
     pass
 
 
 def initializeButtons():
-    option1 = Button(root, text='Enter', command=lambda: buttonPressed(0), default=ACTIVE)    # and on button 
+    option1 = Button(root, text='Enter', command=lambda: buttonPressed(0))    # and on button 
     option1.grid(row=4, sticky=NW)
 
-    option2 = Button(root, text='Enter', command=lambda: buttonPressed(1), default=ACTIVE)    # and on button 
+    option2 = Button(root, text='Enter', command=lambda: buttonPressed(1))    # and on button 
     option2.grid(row=4)
 
-    option3 = Button(root, text='Enter', command=lambda: buttonPressed(2), default=ACTIVE)    # and on button 
+    option3 = Button(root, text='Enter', command=lambda: buttonPressed(2))    # and on button 
     option3.grid(row=4, sticky=NE)
 
     buttons = [option1, option2, option3]
     return buttons
 
 
-def setButtonTexts(translatedSuggestions):
+def setButtonTexts():
 
+    global translatedSuggestions
+    global suggestions
     global buttons
+
+    translatedSuggestions = translate(suggestions)
     for i in range(3):
-        buttons[i]["text"] = translatedSuggestions[i]
+        buttons[i]["text"] = "("+ str(i+1) +")" + translatedSuggestions[i]
+
+def blankButtons():
+    global buttons
+    for button in buttons:
+        button["text"] = '      '
+    pass
 
 def buttonPressed(buttonNumber):
     global suggestions
     print NATIVE_LANGUAGE
-    responseEntry.insert(END, suggestions[buttonNumber])
+    responseEntry.insert(END, suggestions[buttonNumber] + ' ')
+    typing
     pass
+
 def getSuggestions(lastTwoWords):
     
     return ['How', 'are', 'you']
@@ -106,15 +112,21 @@ def typing(event):
     wordArray = userInput.split() 
 
 
-    if(len(wordArray)>1 and userInput[-2] == ' '):
+    if(len(userInput)>1 and userInput[-2] == ' '):
         suggestions = getSuggestions(wordArray)
-        translatedSuggestions = translate(suggestions)
-        setButtonTexts(translatedSuggestions)
+        setButtonTexts()
         conclusionText.delete("1.0", END)
         conclusionText.insert(END, userInput.split()[-2:] ) 
-        #conclusionText.insert(END, "User typed space" ) 
-        #conclusionText.delete("1.0", END)   # delete the text in our conclusion text widget
-        #conclusionText.insert(END, "What you have typed so far:"+ userInput[:-1] ) 
+        
+    elif(userInput[-2].isdigit() and int(userInput[-2]) < 4):
+            button = int(userInput[-2]) - 1
+            print INSERT
+            responseEntry.delete(INSERT+"-1c")
+            buttonPressed(button)
+
+    else: 
+        blankButtons()
+
 
 def clearText(event):
     global TEXTBOX_ACTIVATED
@@ -127,8 +139,10 @@ def clearText(event):
 ##################
 root = Tk()
 root.title('JackBot')
+
+
 hello = Label(text="Enter your text here:")
-hello.grid(row=1, sticky=EW)
+hello.grid(row=1, sticky=W)
 
 
 
