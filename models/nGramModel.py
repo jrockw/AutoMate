@@ -60,6 +60,13 @@ class NGramModel(object):
         """
         pass
 
+    def getDict(self):
+      return self.nGramCounts
+
+    def setDict(self, D):
+      self.nGramCounts = D
+      pass
+
     def trainingDataHasNGram(self, sentence):
         """
         Requires: sentence is a list of strings, and trainingDataHasNGram

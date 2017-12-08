@@ -4,7 +4,7 @@ import ttk
 from googletrans import Translator
 from time import sleep
 from ALL_LANGUAGES import *
-from generate.py import *
+from generate import *
 
 #################
 TEXTBOX_ACTIVATED = False # flag to indicate 
@@ -82,26 +82,23 @@ def blankButtons():
 
 def buttonPressed(buttonNumber):
     global suggestions
-    print NATIVE_LANGUAGE
     responseEntry.insert(END, suggestions[buttonNumber] + ' ')
     typing
     pass
 
 def getSuggestions(wordList):
-    
-    return ['How', 'are', 'you']
-
+    s = models[0].getThreeChoices(wordList)
+    print 'wordList', wordList
+    print "suggestion are:", s
+    return s
 def translate(englishSuggestions):
     print englishSuggestions
     global translator
     global NATIVE_LANGUAGE
-    print ' Native language is:'+ NATIVE_LANGUAGE
     nativeLanguageSuggestions = []
     for englishWord in englishSuggestions:
         nativeWord = translator.translate(englishWord, dest = NATIVE_LANGUAGE)
         nativeLanguageSuggestions.append(nativeWord.text)
-        print englishWord + ':' + nativeWord.text
-    print nativeLanguageSuggestions
     return nativeLanguageSuggestions
 
 def typing(event):
@@ -113,15 +110,14 @@ def typing(event):
     wordArray = userInput.split() 
 
 
-    if(len(userInput)>1 and userInput[-2] == ' '):
+    if(len(wordArray)>1 and userInput[-2] == ' '):
         suggestions = getSuggestions(wordArray)
         setButtonTexts()
         conclusionText.delete("1.0", END)
         conclusionText.insert(END, userInput.split()[-2:] ) 
         
-    elif(userInput[-2].isdigit() and int(userInput[-2]) < 4):
+    elif(len(userInput)>1 and userInput[-2].isdigit() and int(userInput[-2]) < 4):
             button = int(userInput[-2]) - 1
-            print INSERT
             responseEntry.delete(INSERT+"-1c")
             buttonPressed(button)
 
@@ -138,6 +134,9 @@ def clearText(event):
 
 
 ##################
+print 'Loading data...'
+models = trainConversationModels(CONVERDIRS)
+print('Data successfully loaded')
 root = Tk()
 root.title('JackBot')
 

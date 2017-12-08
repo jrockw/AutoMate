@@ -40,28 +40,28 @@ def loadConvers(dirName):
     cleans that line by removing punctuation and extraneous
     whitespaces, and lowercasing all words in the line.
     """
-    lyricsDir = os.path.dirname(os.path.abspath(__file__)) + "/lyrics/"
-    artistDir = os.path.join(lyricsDir, dirName) + "/"
+    newDataDir = os.path.dirname(os.path.abspath(__file__)) + "/new_data/"
+    conversDir = os.path.join(newDataDir, dirName) + "/"
 
-    if not os.path.isdir(artistDir):
-        print "No artist named", artistDir, "in directory", lyricsDir
+    if not os.path.isdir(conversDir):
+        print "No conversation", conversDir, "in directory", newDataDir
         return None
 
-    lyrics = []
+    conversations = []
 
-    songs = os.listdir(artistDir)
-    for song in songs:
-        with open(artistDir + song, 'r') as songFile:
-            songLines = songFile.readlines()
+    sentences = os.listdir(conversDir)
+    for sentence in sentences:
+        with open(conversDir + sentence, 'r') as senFile:
+            senLines = senFile.readlines()
 
         # clean each line in each song and add if not empty
-        for line in songLines:
+        for line in senLines:
             line = line.translate(None, string.punctuation)
             #line = line.split(" ", 1)[-1]
             #line = line.lower().strip()
             if line:
-                lyrics.append(line.split())
-    return lyrics
+                conversations.append(line.split())
+    return conversations
 
 def loadMusic(dirName):
     """
@@ -194,7 +194,7 @@ def formatDuration(asciiDuration):
     return duration
 
 if __name__ == "__main__":
-    conversations = loadConvers('new_data')
+    conversations = loadConvers('conversations')
     for line in conversations:
         print(line)
 
