@@ -4,7 +4,10 @@ import ttk
 from googletrans import Translator
 from time import sleep
 from ALL_LANGUAGES import *
+<<<<<<< HEAD
 from generate.py import *
+=======
+>>>>>>> 51315abd575f555ec560b0730e4ab3cd4c75da93
 
 #################
 TEXTBOX_ACTIVATED = False # flag to indicate 
@@ -87,7 +90,11 @@ def buttonPressed(buttonNumber):
     typing
     pass
 
+<<<<<<< HEAD
 def getSuggestions(wordList):
+=======
+def getSuggestions(lastTwoWords):
+>>>>>>> 51315abd575f555ec560b0730e4ab3cd4c75da93
     
     return ['How', 'are', 'you']
 
