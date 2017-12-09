@@ -7,12 +7,12 @@ from ALL_LANGUAGES import *
 from generate import *
 
 #################
-TEXTBOX_ACTIVATED = False # flag to indicate 
-buttons = []
-suggestions = ['Enter', 'Enter', 'Enter']
-translatedSuggestion = ['Enter', 'Enter', 'Enter']
-NATIVE_LANGUAGE = 'English'
-translator = Translator()
+TEXTBOX_ACTIVATED = False # flag to indicate whether user has clicked text box for first time
+buttons = [] # list to hold button objects
+suggestions = ['Enter', 'Enter', 'Enter'] # list to hold the suggestions in English
+translatedSuggestion = ['Enter', 'Enter', 'Enter'] #list to hold translated suggestions
+NATIVE_LANGUAGE = 'English' # holds native language as selected by user
+translator = Translator() # translator object created using googletrans API
 
 
 
@@ -33,6 +33,7 @@ def initializeResponseEntry():
 
 
 '''
+This function initializes the language selection menu
 '''
 def initializeLangBox():
     options = ALL_LANGUAGES
@@ -42,13 +43,19 @@ def initializeLangBox():
     box.grid(column=0, row=0, sticky = W)
 
 
+    '''
+    This function changes the value of NATIVE_LANGUAGE
+
+    '''
 def updateLangValue(value):
     global NATIVE_LANGUAGE
     NATIVE_LANGUAGE = value
     setButtonTexts()
 
     pass
-
+'''
+Creates a list of buttons and stores them in buttons[]
+'''
 
 def initializeButtons():
     option1 = Button(root, text='Enter', command=lambda: buttonPressed(0))    # and on button 
@@ -63,7 +70,9 @@ def initializeButtons():
     buttons = [option1, option2, option3]
     return buttons
 
-
+'''
+Updates the text on the buttons with the translated suggestions
+'''
 def setButtonTexts():
 
     global translatedSuggestions
@@ -80,17 +89,27 @@ def blankButtons():
         button["text"] = '      '
     pass
 
+'''
+Inserts the English equivalent of the button pressed into the text entry
+'''
+
 def buttonPressed(buttonNumber):
     global suggestions
     responseEntry.insert(END, suggestions[buttonNumber] + ' ')
     typing
     pass
-
+'''
+Passes the list of words the user has typed so far and expects suggestions from the getThreeChoices() function
+'''
 def getSuggestions(wordList):
     s = models[0].getThreeChoices(wordList)
     print 'wordList', wordList
     print "suggestion are:", s
     return s
+
+'''
+Takes the list of english suggestions and returns the translated suggestions
+'''
 def translate(englishSuggestions):
     print englishSuggestions
     global translator
@@ -101,6 +120,9 @@ def translate(englishSuggestions):
         nativeLanguageSuggestions.append(nativeWord.text)
     return nativeLanguageSuggestions
 
+'''
+This function is triggered whenever the user types or presses a button.
+'''
 def typing(event):
 
     global suggestions
@@ -109,13 +131,13 @@ def typing(event):
     userInput = responseEntry.get("1.0",END)
     wordArray = userInput.split() 
 
-
     if(len(wordArray)>1 and userInput[-2] == ' '):
         suggestions = getSuggestions(wordArray)
         setButtonTexts()
         conclusionText.delete("1.0", END)
         conclusionText.insert(END, userInput.split()[-2:] ) 
-        
+    
+    # this case is executed when the user types 1,2, or 3. The corresponding button text is inserted    
     elif(len(userInput)>1 and userInput[-2].isdigit() and int(userInput[-2]) < 4):
             button = int(userInput[-2]) - 1
             responseEntry.delete(INSERT+"-1c")
@@ -124,7 +146,9 @@ def typing(event):
     else: 
         blankButtons()
 
-
+'''
+Clears the starting message when user first activates the text entry box     
+'''
 def clearText(event):
     global TEXTBOX_ACTIVATED
     # removes 'Type here text'
