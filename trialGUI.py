@@ -81,7 +81,7 @@ def setButtonTexts():
 
     translatedSuggestions = translate(suggestions)
     for i in range(3):
-        buttons[i]["text"] = "("+ str(i+1) +")" + translatedSuggestions[i]
+        buttons[i]["text"] = "("+ str(i+1) +")  " + translatedSuggestions[i]
 
 def blankButtons():
     global buttons
@@ -96,13 +96,18 @@ Inserts the English equivalent of the button pressed into the text entry
 def buttonPressed(buttonNumber):
     global suggestions
     responseEntry.insert(END, suggestions[buttonNumber] + ' ')
-    typing
+    typing(1)
     pass
 '''
 Passes the list of words the user has typed so far and expects suggestions from the getThreeChoices() function
 '''
 def getSuggestions(wordList):
-    s = models[0].getThreeChoices(wordList)
+    try:
+        s = models[0].getThreeChoices(wordList)
+    except:
+        print 'exception called'
+        return['','','']
+
     print 'wordList', wordList
     print "suggestion are:", s
     return s
@@ -124,14 +129,14 @@ def translate(englishSuggestions):
 This function is triggered whenever the user types or presses a button.
 '''
 def typing(event):
-
+    print 100 
     global suggestions
     global translatedSuggestions
 
     userInput = responseEntry.get("1.0",END)
     wordArray = userInput.split() 
 
-    if(len(wordArray)>1 and userInput[-2] == ' '):
+    if(len(userInput) or (len(userInput)>1 and userInput[-2] == ' ') ):
         suggestions = getSuggestions(wordArray)
         setButtonTexts()
         conclusionText.delete("1.0", END)
