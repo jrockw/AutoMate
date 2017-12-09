@@ -10,7 +10,13 @@ from models.unigramModel import *
 from models.bigramModel import *
 from models.trigramModel import *
 import json
+import ujson
 import pickle
+from contextlib import closing
+import shelve
+import cPickle as pickle
+
+
 # FIXME Add your team name
 TEAM = 'trAIn'
 LYRICSDIRS = ['the_beatles']
@@ -52,6 +58,7 @@ def selectNGramModel(models, sentence):
     return models[-1]
     pass
 
+
 ###############################################################################
 # Reach
 ###############################################################################
@@ -62,6 +69,7 @@ PROMPT = """
 > """
 ""
 def main():
+    models = []
     """
     Requires: Nothing
     Modifies: Nothing
@@ -74,12 +82,21 @@ def main():
     print('Starting program and loading data...')
     models = trainConversationModels(CONVERDIRS)
     print('Data successfully loaded')
+    """
+    print ('Storing data...')
+    json.dump(models[0].getDict(), open('trigramData.json', 'wb'))
+    print('Stored data!')
+    print('Getting data...')
+    data = json.load(open('trigramData.json'))
+    print('Got data!')
+    """
+    """
     sentence1 = ['baby', 'I', 'love']
     sentence2 = ['whats', 'the']
     sentence3 = ['hello']
     print models[0].getThreeChoices(sentence1)
     print models[2].getThreeChoices(sentence3)
-
+    """
 
 
 
