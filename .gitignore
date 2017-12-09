@@ -4,7 +4,6 @@
 *.swo
 *.wav
 *.mid
-*.txt
 data/scrapers/one-directionMusicScraper.py
-*.txt
+
 *.txt
