@@ -51,6 +51,17 @@ class TrigramModel(NGramModel):
                     self.nGramCounts[a[i]][a[i+1]] = {}
                     self.nGramCounts[a[i]][a[i+1]][a[i+2]] = 1
 
+    def copyModel(self):
+        lines = []
+        with open('w3.txt') as f:
+            #lines = f.readlines()
+            for line in lines: 
+                line = line.strip() 
+                lines.append(line)
+                print line 
+    pass
+
+
     def trainingDataHasNGram(self, sentence):
         """
         Requires: sentence is a list of strings, and len(sentence) >= 2
@@ -159,3 +170,6 @@ if __name__ == '__main__':
     print trigramModel.getCandidateDictionary(sentence3)
     text.append(sentence)
 
+    print 'testing copyModel...'
+    trigramModel.copyModel()
+    print 'test complete'
