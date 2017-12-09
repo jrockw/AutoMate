@@ -136,7 +136,7 @@ def typing(event):
     userInput = responseEntry.get("1.0",END)
     wordArray = userInput.split() 
 
-    if(len(userInput) or (len(userInput)>1 and userInput[-2] == ' ') ):
+    if(len(userInput) == 0 or (len(userInput)>1 and userInput[-2] == ' ') ):
         suggestions = getSuggestions(wordArray)
         setButtonTexts()
         conclusionText.delete("1.0", END)
@@ -144,6 +144,7 @@ def typing(event):
     
     # this case is executed when the user types 1,2, or 3. The corresponding button text is inserted    
     elif(len(userInput)>1 and userInput[-2].isdigit() and int(userInput[-2]) < 4):
+
             button = int(userInput[-2]) - 1
             responseEntry.delete(INSERT+"-1c")
             buttonPressed(button)

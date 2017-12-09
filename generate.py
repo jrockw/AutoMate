@@ -10,7 +10,7 @@ from models.unigramModel import *
 from models.bigramModel import *
 from models.trigramModel import *
 import json
-import ujson
+#import ujson
 import pickle
 from contextlib import closing
 import shelve
