@@ -1,9 +1,6 @@
 import random
 from nGramModel import *
-<<<<<<< HEAD
 import operator
-=======
->>>>>>> 51315abd575f555ec560b0730e4ab3cd4c75da93
 
 class TrigramModel(NGramModel):
 
