@@ -64,17 +64,19 @@ class UnigramModel(NGramModel):
                   to the current sentence. For details on which words the
                   UnigramModel sees as candidates, see the spec.
         """
+        kList = []
+        kList = self.nGramCounts.keys()
+        for k in kList:
+            if (k.startswith('l') and k[-1].isdigit()) or k[0].isdigit():
+                self.nGramCounts.pop(k)
         return self.nGramCounts
-        pass
 
 
 
     def getThreeChoices(self, sentence):
-        #allChoices = self.getCandidateDictionary #allChoices is a dictionary
-        
+        allChoices = self.getCandidateDictionary #allChoices is a dictionary
         #For testing
-        allChoices = {"a" : 5, "j" : 12, "f" : 8, "u" : 2, "b" : 20, "k" : 10}
-
+        #allChoices = {"a" : 5, "j" : 12, "f" : 8, "u" : 2, "b" : 20, "k" : 10}
         poss = []
         sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
         poss.append(sorted_allChoices[-1][0])
@@ -152,6 +154,7 @@ if __name__ == '__main__':
 
     print "\nTesting getThreeChoices"
     print unigramModel.getThreeChoices(testSentence1)
+    #print unigramModel.getCandidateDictionary(testSentence1)
 
 
 

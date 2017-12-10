@@ -85,7 +85,9 @@ class BigramModel(NGramModel):
         poss.append(sorted_allChoices[-1][0])
         poss.append(sorted_allChoices[-2][0])
         poss.append(sorted_allChoices[-3][0])
-
+        for i in range(0, len(poss)):
+            if poss[i] == '$:::$':
+                poss[i] = sorted_allChoices[-4][0]
         return poss
 
 

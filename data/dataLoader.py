@@ -58,7 +58,7 @@ def loadConvers(dirName):
         for line in senLines:
             line = line.translate(None, string.punctuation)
             #line = line.split(" ", 1)[-1]
-            #line = line.lower().strip()
+            line = line.lower().strip()
             if line:
                 conversations.append(line.split())
     return conversations
