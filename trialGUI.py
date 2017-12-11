@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from Tkinter import *
+from ScrolledText import ScrolledText
 import ttk
 from googletrans import Translator
 from time import sleep
@@ -26,9 +27,9 @@ This function creates the text box to receive user input.
 The  text box is sensitive to keyboard input and 
 '''
 def initializeResponseEntry():
-    responseEntry = Text(width=40, height=3)
+    responseEntry = ScrolledText(width=40, height=6, relief=GROOVE)
     responseEntry.insert(END, 'Type here')
-    responseEntry.grid(row=2, sticky=EW)
+    responseEntry.grid(row=2, sticky=EW, padx=50)
     responseEntry.bind('<KeyRelease>', typing)
     responseEntry.bind('<BackSpace>', blankButtons()) 
     responseEntry.bind('<Button-1>', clearText)
@@ -61,13 +62,13 @@ Creates a list of buttons and stores them in buttons[]
 
 def initializeButtons():
     option1 = Button(root, text='Enter', command=lambda: buttonPressed(0))    # and on button 
-    option1.grid(row=4, sticky=NW)
+    option1.grid(row=4, sticky=NW, padx=50)
 
     option2 = Button(root, text='Enter', command=lambda: buttonPressed(1))    # and on button 
     option2.grid(row=4)
 
     option3 = Button(root, text='Enter', command=lambda: buttonPressed(2))    # and on button 
-    option3.grid(row=4, sticky=NE)
+    option3.grid(row=4, sticky=NE, padx=50)
 
     buttons = [option1, option2, option3]
     return buttons
@@ -176,8 +177,10 @@ models = trainConversationModels(CONVERDIRS)
 print('Data successfully loaded')
 root = Tk()
 root.title('JackBot')
-
-
+root.geometry("400x200+150+150")
+lightGreen = '#%02x%02x%02x' % (140, 225, 225)
+root.configure(background=lightGreen)
+root.tk_setPalette(background=lightGreen)
 hello = Label(text="Enter your text here:")
 hello.grid(row=1, sticky=W)
 
@@ -187,7 +190,7 @@ LangBox = initializeLangBox()
 responseEntry = initializeResponseEntry()
 buttons = initializeButtons()
 
-
+#Remove for final version
 conclusionText = Text(width=40, height=5)
 conclusionText.insert(END, "What you have typed so far:")
 conclusionText.grid(row=5, columnspan=2)
