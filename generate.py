@@ -97,7 +97,7 @@ def main():
     models = trainConversationModels(CONVERDIRS)
     print('Data successfully loaded')
     print('Testing selectChoices...')
-    sentence1 = ['I', 'am', 'the']
+    sentence1 = ['are', 'you', 'today']
     sentence2 = ['the', 'xylophone']
     print(selectChoices(models, sentence1))
     print(selectChoices(models, sentence2))
