@@ -2,6 +2,8 @@ import random
 from nGramModel import *
 import operator
 import nltk
+from nltk.corpus import brown 
+
 
 class UnigramModel(NGramModel):
 
@@ -90,8 +92,7 @@ class UnigramModel(NGramModel):
             poss.append(sorted_allChoices[-3][0])
         for i in range(0, len(poss)):
             if poss[i] == '$:::$':
-                if len(sorted_allChoices) >= 4:
-                    poss[i] = sorted_allChoices[-4][0]
+                poss[i] = '.'
         return poss
 
 
@@ -168,7 +169,8 @@ if __name__ == '__main__':
 
 
 
-    #nltk.download()
+    print brown.words()
+
 
 
 

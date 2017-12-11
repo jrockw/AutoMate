@@ -113,6 +113,7 @@ def getSuggestions(wordList):
         if(len(s) != 3):
             print 'Didnt get three suggestions'
             s = ['','','']
+
     except:
         print 'exception called'
         return['','','']
