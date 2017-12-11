@@ -107,6 +107,8 @@ def getSuggestions(wordList):
     try:
         #s = models[0].getThreeChoices(wordList)
         s = selectChoices(models, wordList)
+        if(len(s) != 3):
+            return ['','','']
     except:
         print 'exception called'
         return['','','']
