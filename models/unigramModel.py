@@ -93,6 +93,10 @@ class UnigramModel(NGramModel):
         for i in range(0, len(poss)):
             if poss[i] == '$:::$':
                 poss[i] = '.'
+        numOptions = len(poss)
+        if numOptions < 3:
+            for p in range(0, 3 - numOptions):
+                poss.append("");
         return poss
 
 

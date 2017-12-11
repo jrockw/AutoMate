@@ -121,7 +121,11 @@ class TrigramModel(NGramModel):
             poss.append(sorted_allChoices[-3][0])
         for i in range(0, len(poss)):
             if poss[i] == '$:::$':
-                poss[i] = '.'     
+                poss[i] = '.'  
+        numOptions = len(poss)
+        if numOptions < 3:
+            for p in range(0, 3 - numOptions):
+                poss.append("");   
         return poss
 
 
