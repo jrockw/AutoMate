@@ -2,6 +2,15 @@ import random
 import sys
 import json
 from musicInfo import *
+import nltk
+from nltk.corpus import brown
+from nltk.corpus import wordnet
+#from nltk.corpus import basque_grammars
+#from nltk.corpus import book_grammars
+#from nltk.corpus import large_grammars
+#from nltk.corpus import sample_grammars
+#from nltk.corpus import spanish_grammars
+
 
 class NGramModel(object):
 
@@ -210,10 +219,12 @@ if __name__ == '__main__':
         ctBlue +=1
     print ctRed, ctOrange, ctGreen, ctBlue
 
+    #nltk.download("all")
+    #print brown.words()
+    #print basque_grammars.words()
 
-
-
-
+    #syns = wordnet.synsets("program")
+    #print(syns[0].name())
 
 
 

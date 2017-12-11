@@ -73,6 +73,7 @@ class BigramModel(NGramModel):
         if sentence[-1] in self.nGramCounts:
           for i in self.nGramCounts[sentence[-1]]:
                 D[i] = self.nGramCounts[sentence[-1]][i]
+        #D['.'] = D.pop('$:::$')
         return D
         pass
 
@@ -82,16 +83,19 @@ class BigramModel(NGramModel):
         allChoices = self.getCandidateDictionary(sentence)
         poss = []
         sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
-        if len(sorted_allChoices) >= 3:
+        if len(sorted_allChoices) >= 1:
             poss.append(sorted_allChoices[-1][0])
         if len(sorted_allChoices) >= 2:    
             poss.append(sorted_allChoices[-2][0])
-        if len(sorted_allChoices) >= 1:
+        if len(sorted_allChoices) >= 3:
             poss.append(sorted_allChoices[-3][0])
         for i in range(0, len(poss)):
             if poss[i] == '$:::$':
-                if len(sorted_allChoices) >= 4:
-                    poss[i] = sorted_allChoices[-4][0]
+                poss[i] = '.'
+        numOptions = len(poss)
+        if numOptions < 3:
+            for p in range(0, 3 - numOptions):
+                poss.append("");
         return poss
 
 

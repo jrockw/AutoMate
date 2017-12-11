@@ -103,6 +103,7 @@ class TrigramModel(NGramModel):
             if sentence[-1] in self.nGramCounts[sentence[-2]]:
               for i in self.nGramCounts[sentence[-2]][sentence[-1]]:
                 D[i] = self.nGramCounts[sentence[-2]][sentence[-1]][i]
+        #D['.'] = D.pop('$:::$')
         return D
         pass
 
@@ -112,16 +113,19 @@ class TrigramModel(NGramModel):
         allChoices = self.getCandidateDictionary(sentence)
         poss = []
         sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
-        if len(sorted_allChoices) >= 3:
+        if len(sorted_allChoices) >= 1:
             poss.append(sorted_allChoices[-1][0])
         if len(sorted_allChoices) >= 2:    
             poss.append(sorted_allChoices[-2][0])
-        if len(sorted_allChoices) >= 1:
+        if len(sorted_allChoices) >= 3:
             poss.append(sorted_allChoices[-3][0])
         for i in range(0, len(poss)):
             if poss[i] == '$:::$':
-                if len(sorted_allChoices) >= 4:
-                    poss[i] = sorted_allChoices[-4][0]
+                poss[i] = '.'  
+        numOptions = len(poss)
+        if numOptions < 3:
+            for p in range(0, 3 - numOptions):
+                poss.append("");   
         return poss
 
 
@@ -167,7 +171,7 @@ if __name__ == '__main__':
     print 'Test 2'
     print 'Test 2 should return False'
     print trigramModel.trainingDataHasNGram(sentence2)
-
+    
     '''
     Testing getCandidateDictionary
     '''
@@ -175,5 +179,4 @@ if __name__ == '__main__':
     text2 = [ ['the', 'quick', 'brown', 'fox'], ['the', 'quick', 'brown'], ['the', 'quick', 'green'] ]
     print trigramModel.getCandidateDictionary(sentence3)
     text.append(sentence)
-
     print 'test complete'
