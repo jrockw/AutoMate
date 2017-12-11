@@ -112,12 +112,16 @@ class TrigramModel(NGramModel):
         allChoices = self.getCandidateDictionary(sentence)
         poss = []
         sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
-        poss.append(sorted_allChoices[-1][0])
-        poss.append(sorted_allChoices[-2][0])
-        poss.append(sorted_allChoices[-3][0])
+        if len(sorted_allChoices) >= 3:
+            poss.append(sorted_allChoices[-1][0])
+        if len(sorted_allChoices) >= 2:    
+            poss.append(sorted_allChoices[-2][0])
+        if len(sorted_allChoices) >= 1:
+            poss.append(sorted_allChoices[-3][0])
         for i in range(0, len(poss)):
             if poss[i] == '$:::$':
-                poss[i] = sorted_allChoices[-4][0]
+                if len(sorted_allChoices) >= 4:
+                    poss[i] = sorted_allChoices[-4][0]
         return poss
 
 

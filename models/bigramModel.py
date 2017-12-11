@@ -1,6 +1,6 @@
 import random
 from nGramModel import *
-
+import operator
 
 class BigramModel(NGramModel):
 
@@ -79,15 +79,19 @@ class BigramModel(NGramModel):
 
 
     def getThreeChoices(self, sentence):
-        allChoices = self.getCandidateDictionary
+        allChoices = self.getCandidateDictionary(sentence)
         poss = []
         sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
-        poss.append(sorted_allChoices[-1][0])
-        poss.append(sorted_allChoices[-2][0])
-        poss.append(sorted_allChoices[-3][0])
+        if len(sorted_allChoices) >= 3:
+            poss.append(sorted_allChoices[-1][0])
+        if len(sorted_allChoices) >= 2:    
+            poss.append(sorted_allChoices[-2][0])
+        if len(sorted_allChoices) >= 1:
+            poss.append(sorted_allChoices[-3][0])
         for i in range(0, len(poss)):
             if poss[i] == '$:::$':
-                poss[i] = sorted_allChoices[-4][0]
+                if len(sorted_allChoices) >= 4:
+                    poss[i] = sorted_allChoices[-4][0]
         return poss
 
 
@@ -100,7 +104,7 @@ class BigramModel(NGramModel):
 if __name__ == '__main__':
     # Add your test cases here
     text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    sentence1 = [ 'quick', 'brown' ]
+    sentence1 = [ 'quick', 'brown', 'fox']
     sentence2 = [ 'lazy', 'quick']
     sentence3 = ['brown', 'fox']
     sentence4 = ['quick', 'fat']
@@ -157,7 +161,8 @@ if __name__ == '__main__':
     print 'Test 3 should return True'
     print bigramModel.trainingDataHasNGram(sentence3)
 
-
+    print 'Testing getThreeChoices'
+    print bigramModel.getThreeChoices(sentence1)
 
 
 

@@ -1,6 +1,7 @@
 import random
 from nGramModel import *
 import operator
+import nltk
 
 class UnigramModel(NGramModel):
 
@@ -74,16 +75,25 @@ class UnigramModel(NGramModel):
 
 
     def getThreeChoices(self, sentence):
-        allChoices = self.getCandidateDictionary #allChoices is a dictionary
+        poss = []
+        allChoices = self.getCandidateDictionary(sentence) #allChoices is a dictionary
         #For testing
         #allChoices = {"a" : 5, "j" : 12, "f" : 8, "u" : 2, "b" : 20, "k" : 10}
-        poss = []
+        #sorted_allChoices = []
+        #sorted_allChoices = sorted(self.getCandidateDictionary(sentence), key=self.getCandidateDictionary.get())
         sorted_allChoices = sorted(allChoices.items(), key = operator.itemgetter(1))
-        poss.append(sorted_allChoices[-1][0])
-        poss.append(sorted_allChoices[-2][0])
-        poss.append(sorted_allChoices[-3][0])
-
+        if len(sorted_allChoices) >= 3:
+            poss.append(sorted_allChoices[-1][0])
+        if len(sorted_allChoices) >= 2:    
+            poss.append(sorted_allChoices[-2][0])
+        if len(sorted_allChoices) >= 1:
+            poss.append(sorted_allChoices[-3][0])
+        for i in range(0, len(poss)):
+            if poss[i] == '$:::$':
+                if len(sorted_allChoices) >= 4:
+                    poss[i] = sorted_allChoices[-4][0]
         return poss
+
 
 
 ###############################################################################
@@ -158,7 +168,7 @@ if __name__ == '__main__':
 
 
 
-
+    #nltk.download()
 
 
 
