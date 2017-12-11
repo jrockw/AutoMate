@@ -107,6 +107,8 @@ def getSuggestions(wordList):
     try:
         #s = models[0].getThreeChoices(wordList)
         s = selectChoices(models, wordList)
+        if(len(s) != 3):
+            return ['','','']
     except:
         print 'exception called'
         return['','','']
@@ -137,7 +139,7 @@ def typing(event):
     userInput = responseEntry.get("1.0",END)
     wordArray = userInput.split() 
 
-    if(len(userInput) == 0 or (len(userInput)>1 and userInput[-2] == ' ') ):
+    if(len(userInput) == 1 or (len(userInput)>1 and userInput[-2] == ' ') ):
         suggestions = getSuggestions(wordArray)
         setButtonTexts()
         conclusionText.delete("1.0", END)
@@ -162,6 +164,7 @@ def clearText(event):
     if(not TEXTBOX_ACTIVATED):
         responseEntry.delete("1.0", END)
         TEXTBOX_ACTIVATED = True
+        typing(1)
 
 
 ##################
