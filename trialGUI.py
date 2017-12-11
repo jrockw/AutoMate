@@ -83,7 +83,10 @@ def setButtonTexts():
 
     translatedSuggestions = translate(suggestions)
     for i in range(3):
-        buttons[i]["text"] = "("+ str(i+1) +")  " + translatedSuggestions[i]
+        if (translatedSuggestions[i] == ''):
+            buttons[i]["text"] = ''
+        else:
+            buttons[i]["text"] = "("+ str(i+1) +")  " + translatedSuggestions[i]
 
 def blankButtons():
     global buttons
@@ -104,11 +107,12 @@ def buttonPressed(buttonNumber):
 Passes the list of words the user has typed so far and expects suggestions from the getThreeChoices() function
 '''
 def getSuggestions(wordList):
+    print '1:Getting suggestions...'
     try:
-        #s = models[0].getThreeChoices(wordList)
         s = selectChoices(models, wordList)
         if(len(s) != 3):
-            return ['','','']
+            print 'Didnt get three suggestions'
+            s = ['','','']
     except:
         print 'exception called'
         return['','','']
@@ -137,10 +141,13 @@ def typing(event):
     global translatedSuggestions
 
     userInput = responseEntry.get("1.0",END)
+    print '------------'
+    print 'userInput', userInput
     wordArray = userInput.split() 
 
     if(len(userInput) == 1 or (len(userInput)>1 and userInput[-2] == ' ') ):
         suggestions = getSuggestions(wordArray)
+        print '2: Got suggestions...'
         setButtonTexts()
         conclusionText.delete("1.0", END)
         conclusionText.insert(END, userInput.split()[-2:] ) 
