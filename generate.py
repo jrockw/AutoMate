@@ -59,6 +59,19 @@ def selectNGramModel(models, sentence):
     return models[-1]
     pass
 
+def selectChoices(models, sentence):
+    choices = models[0].getThreeChoices(sentence)
+    if len(choices) != 3:
+        for i in range(0, 1):
+            if len(choices) == 0:
+                choices = models[i+1].getThreeChoices(sentence)
+            elif len(choices == 1):
+                choices[1] = models[i+1].getThreeChoices(sentence)
+                choices[2] = models[i+1].getThreeChoices(sentence)
+            elif len(choices == 2):
+                choices[2] = models[i+1].getThreeChoices(sentence)
+    return choices
+
 
 ###############################################################################
 # Reach
@@ -83,9 +96,11 @@ def main():
     print('Starting program and loading data...')
     models = trainConversationModels(CONVERDIRS)
     print('Data successfully loaded')
-    print('Testing unigram...')
+    print('Testing selectChoices...')
     sentence1 = ['I', 'am', 'the']
-    print models[2].getCandidateDictionary(sentence1)
+    sentence2 = ['the', 'xylophone']
+    print(selectChoices(models, sentence1))
+    print(selectChoices(models, sentence2))
     #print models[2].getThreeChoices(sentence1)
     """
     print ('Storing data...')

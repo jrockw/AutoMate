@@ -105,7 +105,8 @@ Passes the list of words the user has typed so far and expects suggestions from 
 '''
 def getSuggestions(wordList):
     try:
-        s = models[0].getThreeChoices(wordList)
+        #s = models[0].getThreeChoices(wordList)
+        s = selectChoices(models, wordList)
     except:
         print 'exception called'
         return['','','']
