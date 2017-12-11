@@ -7,6 +7,9 @@ from ALL_LANGUAGES import *
 from generate import *
 
 #################
+'''
+Global variables are declared here.
+'''
 TEXTBOX_ACTIVATED = False # flag to indicate whether user has clicked text box for first time
 buttons = [] # list to hold button objects
 suggestions = ['Enter', 'Enter', 'Enter'] # list to hold the suggestions in English
@@ -43,10 +46,9 @@ def initializeLangBox():
     box.grid(column=0, row=0, sticky = W)
 
 
-    '''
-    This function changes the value of NATIVE_LANGUAGE
-
-    '''
+'''
+This function changes the value of NATIVE_LANGUAGE
+'''
 def updateLangValue(value):
     global NATIVE_LANGUAGE
     NATIVE_LANGUAGE = value
@@ -116,7 +118,6 @@ def getSuggestions(wordList):
 Takes the list of english suggestions and returns the translated suggestions
 '''
 def translate(englishSuggestions):
-    print englishSuggestions
     global translator
     global NATIVE_LANGUAGE
     nativeLanguageSuggestions = []
@@ -129,7 +130,6 @@ def translate(englishSuggestions):
 This function is triggered whenever the user types or presses a button.
 '''
 def typing(event):
-    print 100 
     global suggestions
     global translatedSuggestions
 
@@ -164,6 +164,9 @@ def clearText(event):
 
 
 ##################
+'''
+All the GUI functions are called here.
+'''
 print 'Loading data...'
 models = trainConversationModels(CONVERDIRS)
 print('Data successfully loaded')
@@ -186,4 +189,4 @@ conclusionText.insert(END, "What you have typed so far:")
 conclusionText.grid(row=5, columnspan=2)
 
 root.mainloop()
-
+################
