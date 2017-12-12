@@ -4,4 +4,16 @@ Please install the following before running our code:
 
 We have also used TKinter to make the GUI. Usually TKinter comes pre-installed with python. If you don't have TKinter, please install that too.
 
-To run our code, cd to the repository and execute "python trialGUI.py"
+To run our code, cd to the repository and execute "python trialGUI.py'
+
+ABOUT OUR PROJECT:
+
+We have built a python app to help people who don't know English very well. Many times, bilinguals(good at native language, intermediate level at english) know the word they want to use in their native language, but don't know its English translation. There are also times when bilinguals would like to know what English word should come next. Our app gives the user suggestions in their native language and when the users select the word in their native language, the English word is inserted in the textbox.
+
+
+VISUAL REACH:
+
+For the visual reach, we have implemented a GUI. The GUI allows users to select their native language using a drop box. Then it prompts the user to type in a text box. After the user types a few words and presses a space, the GUI takes these words and passes it to the data reach part of the project which returns suggestions for the next words. Suggestions start appearing only after a few words have been typed and there is a space between the last word and the cursor. These suggestions are translated to the user's native language. The suggestions in the native language are then printed on the buttons. The user can click one of the buttons to insert the suggestion. When the user clicks a button, the English word is inserted in the text box. The user can also press numbers 1,2, or 3 to insert the corresponding suggestions. 
+
+DATA REACH:
+
