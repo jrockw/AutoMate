@@ -187,11 +187,13 @@ models = trainConversationModels(CONVERDIRS)
 root = Tk()
 root.title('JackBot')
 root.geometry("400x200+150+150")
-lightGreen = '#%02x%02x%02x' % (140, 225, 225)
+lightGreen = '#%02x%02x%02x' % (255, 173, 164)
 root.configure(background=lightGreen)
 root.tk_setPalette(background=lightGreen)
 hello = Label(text="Enter your text here:")
 hello.grid(row=1, sticky=W)
+langSelect = Label(text="Select language:")
+langSelect.grid(row=0, sticky=W)
 
 
 
