@@ -1,8 +1,7 @@
 import random
 from nGramModel import *
 import operator
-import nltk
-from nltk.corpus import brown 
+
 
 
 class UnigramModel(NGramModel):
@@ -42,21 +41,6 @@ class UnigramModel(NGramModel):
                     self.nGramCounts[b] += 1
                 else :
                     self.nGramCounts[b] = 1
-
-        
-
-    def trainingDataHasNGram(self, sentence):
-        """
-        Requires: sentence is a list of strings
-        Modifies: nothing
-        Effects:  returns True if this n-gram model can be used to choose
-                  the next token for the sentence. For explanations of how this
-                  is determined for the UnigramModel, see the spec.
-        """
-        if (len(self.nGramCounts) != 0):
-            return True
-        return False
-        pass
 
     def getCandidateDictionary(self, sentence):
         """
@@ -109,73 +93,6 @@ class UnigramModel(NGramModel):
 
 if __name__ == '__main__':
     # Add your test cases here
-    text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    sentence = [ 'brown' ]
-    sentence2 = ['brown', 'the', 'lazy']
-    unigramModel = UnigramModel()
-    print(unigramModel)
-
-    print 'Testing unigram trainModel'
-
-    print 'Test 1'
-    unigramModel.trainModel(text)
-    print unigramModel.nGramCounts
-
-    print 'Test 2'
-    text.append(sentence)
-    unigramModel.trainModel(text)
-    print unigramModel.nGramCounts
-
-    print 'Test 3'
-    text.append(sentence2)
-    unigramModel.trainModel(text)
-    print unigramModel.nGramCounts
-
-    print 'Testing getCandidateDictionary'
-    print (unigramModel.getCandidateDictionary(sentence))
-
-    print 'Testing unigram trainingDataHasNGram'
-
-    print 'Test 1'
-    print 'Test 1 should return True'
-    print unigramModel.trainingDataHasNGram(sentence)
-
-    print 'Test 2'
-    unigramModel.nGramCounts = {}
-    print 'Test 2 should return False'
-    print unigramModel.trainingDataHasNGram(sentence)
-
-    unigramModel.trainModel(text)
-    
-    print 'Test 3'
-    sentence4 = ['bob']
-    print 'Test 3 should return True'
-    print unigramModel.trainingDataHasNGram(sentence4)
-
-    print "\nTesting getNextToken"
-    testSentence1 = "Apples are really tasty and apples are really good especially when apples"
-    testSentence2 = "I like to run and jog and swim and jog in the weather outside"
-    testSentence3 = "Mountains have caves in them and lots of snow in the winter caves caves"
-    print "\nTesting Sentence 1"
-    for p in range(0,7):
-      print unigramModel.getNextToken(testSentence1)
-
-    print "\nTesting Sentence 2"
-    for p in range(0,7):
-      print unigramModel.getNextToken(testSentence2)
-
-    print "\nTesting Sentence 3"
-    for p in range(0,7):
-      print unigramModel.getNextToken(testSentence3)
-
-
-    print "\nTesting getThreeChoices"
-    print unigramModel.getThreeChoices(testSentence1)
-    #print unigramModel.getCandidateDictionary(testSentence1)
-
-
-
-    print brown.words()
 
 
 
