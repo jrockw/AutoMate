@@ -1,15 +1,6 @@
 import random
 import sys
-import json
-from musicInfo import *
-import nltk
-from nltk.corpus import brown
-from nltk.corpus import wordnet
-#from nltk.corpus import basque_grammars
-#from nltk.corpus import book_grammars
-#from nltk.corpus import large_grammars
-#from nltk.corpus import sample_grammars
-#from nltk.corpus import spanish_grammars
+
 
 
 class NGramModel(object):
@@ -76,19 +67,6 @@ class NGramModel(object):
       self.nGramCounts = D
       pass
 
-    def trainingDataHasNGram(self, sentence):
-        """
-        Requires: sentence is a list of strings, and trainingDataHasNGram
-                  has returned True for this particular language model
-        Modifies: nothing
-        Effects:  returns a bool indicating whether or not this n-gram model
-                  can be used to choose the next token for the current
-                  sentence. This function does not need to be modified because
-                  you will override it in NGramModel child classes according
-                  to the spec.
-        """
-        pass
-
     def getCandidateDictionary(self, sentence):
         """
         Requires: sentence is a list of strings
@@ -99,90 +77,6 @@ class NGramModel(object):
                   classes according to the spec.
         """
         pass
-
-    def weightedChoice(self, candidates):
-        """
-        Requires: candidates is a dictionary; the keys of candidates are items
-                  you want to choose from and the values are integers
-        Modifies: nothing
-        Effects:  returns a candidate item (a key in the candidates dictionary)
-                  based on the algorithm described in the spec.
-        """
-
-        words = []
-        for i in candidates.keys():
-          words.append(i)
-
-        weights = candidates.values()
-        
-        cumulative = []
-        sum = 0
-        for p in weights:
-          sum += p
-          cumulative.append(sum)
-
-        num_choice = random.randrange(0,sum)
-
-        counter = 0
-        for j in cumulative:
-          if j > num_choice:
-            return words[counter]
-          else:
-            counter += 1
-
-
-        pass
-
-    def getNextToken(self, sentence):
-        """
-        Requires: sentence is a list of strings, and this model can be used to
-                  choose the next token for the current sentence
-        Modifies: nothing
-        Effects:  returns the next token to be added to sentence by calling
-                  the getCandidateDictionary and weightedChoice functions.
-                  For more information on how to put all these functions
-                  together, see the spec.
-        """
-
-        possibilities = self.getCandidateDictionary(sentence)
-        nextToken = self.weightedChoice(possibilities)
-        return nextToken
-
-        pass
-
-    def getNextNote(self, musicalSentence, possiblePitches):
-        """
-        Requires: musicalSentence is a list of PySynth tuples,
-                  possiblePitches is a list of possible pitches for this
-                  line of music (in other words, a key signature), and this
-                  model can be used to choose the next note for the current
-                  musical sentence
-        Modifies: nothing
-        Effects:  returns the next note to be added to the "musical sentence".
-                  For details on how to do this and how this will differ
-                  from getNextToken, see the spec.
-        """
-        allCandidates = self.getCandidateDictionary(musicalSentence)
-        #print 'possiblePitches:', possiblePitches
-        #print allCandidates
-        constrainedCandidates = {}
-        for i in allCandidates.keys():
-          for j in possiblePitches:
-            if i[0].startswith(j):
-              constrainedCandidates[i] = allCandidates[i]
-          if i[0] == '$:::$':
-            constrainedCandidates[i] = allCandidates[i]
-        if constrainedCandidates != {}:
-          return self.weightedChoice(constrainedCandidates)
-        else:
-          randTup = (random.choice(possiblePitches) + '4', random.choice(NOTE_DURATIONS))
-          return randTup
-
-        pass
-
-
-
-
 
     def getThreeChoices(self, sentence):
         #returns a list of three words which are the top three
@@ -197,34 +91,7 @@ class NGramModel(object):
 
 if __name__ == '__main__':
     # Add your tests here
-    text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    choices = { 'the': 2, 'quick': 1, 'brown': 1 }
-    nGramModel = NGramModel()
-    print(nGramModel)
-    print "Testing weightedChoice"
-    testDict = { "red" : 4, "orange" : 3, "green" : 2, "blue" : 1 }
-    ctRed = 0 
-    ctOrange = 0
-    ctGreen = 0
-    ctBlue = 0
-    for i in range(0,1000):
-      x = nGramModel.weightedChoice(testDict)
-      if x == "red":
-        ctRed +=1
-      elif x == "orange":
-        ctOrange +=1
-      elif x == "green":
-        ctGreen +=1
-      elif x == "blue":
-        ctBlue +=1
-    print ctRed, ctOrange, ctGreen, ctBlue
-
-    #nltk.download("all")
-    #print brown.words()
-    #print basque_grammars.words()
-
-    #syns = wordnet.synsets("program")
-    #print(syns[0].name())
+    
 
 
 

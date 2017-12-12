@@ -1,6 +1,7 @@
 Please install the following before running our code:
-1)googletrans (sudo pip install googletrans)
-2)nltk (sudo pip install nltk)
+1) googletrans (sudo pip install googletrans)
+2) nltk (sudo pip install nltk)
+3) import operator
 
 We have also used TKinter to make the GUI. Usually TKinter comes pre-installed with python. If you don't have TKinter, please install that too.
 
@@ -17,4 +18,6 @@ VISUAL REACH(Parth Aggarwal and Jacob Rockwell):
 For the visual reach, we have implemented a GUI. The GUI allows users to select their native language using a drop box. Then it prompts the user to type in a text box. After the user types a few words and presses a space, the GUI takes these words and passes it to the data reach part of the project which returns suggestions for the next words. Suggestions start appearing only after a few words have been typed and there is a space between the last word and the cursor. These suggestions are translated to the user's native language using the googletrans api. The suggestions in the native language are then printed on the buttons. The user can click one of the buttons to insert the suggestion. When the user clicks a button, the English word is inserted in the text box. The user can also press numbers 1,2, or 3 to insert the corresponding suggestions. 
 
 DATA REACH(Abhinav Saksena and Reuben Gutmann):
+
+We have trained our models on the following two datasets: 1) The Santa Barbara corpus: a collection of conversations in English amounting to 249000 words and 2) The Cornell Movie-Dialogues corpus: A collection of 220000 fictional conversations taken from movie scripts. We first cleaned the data in these datasets using a modified version of the loadLyrics() helper function. We then trained all the models using our trainModel() functions implemented in the core. After this, we ranked the choice of words in the candidate dictionary, and returned the top three choices. In order to ensure that there were no conflicts with GUI, we wrote a function in generate.py that switches to the next best model depending on the number of choices the preferred model produces in case the number of choices is less than three. 
 
