@@ -3,6 +3,8 @@ Please install the following before running our code:
 
 We have also used TKinter to make the GUI. Usually TKinter comes pre-installed with python. If you don't have TKinter, please install that too.
 
+Since we use the googletrans API, you will have to be connected to the internet for our app to work.
+
 To run our code, cd to the repository and execute "python GUI.py'. The values printed to the console are for testing purposes only. The GUI will pop up in a separate window. Please use the GUI only to interact with our app. Ignore anything in the console. It takes around 50 seconds for the data to train. The GUI is generated only after the data is trained. Please be patient!
 
 ABOUT OUR PROJECT:
