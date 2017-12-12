@@ -51,31 +51,6 @@ class TrigramModel(NGramModel):
                     self.nGramCounts[a[i]][a[i+1]] = {}
                     self.nGramCounts[a[i]][a[i+1]][a[i+2]] = 1
 
-    def copyModel(self):
-        lines = []
-        with open('w3.txt') as f:
-            #lines = f.readlines()
-            for line in lines: 
-                line = line.strip() 
-                lines.append(line)
-                print line 
-    pass
-
-
-    def trainingDataHasNGram(self, sentence):
-        """
-        Requires: sentence is a list of strings, and len(sentence) >= 2
-        Modifies: nothing
-        Effects:  returns True if this n-gram model can be used to choose
-                  the next token for the sentence. For explanations of how this
-                  is determined for the TrigramModel, see the spec.
-        """
-        if sentence[-2] in self.nGramCounts:
-            if sentence[-1] in self.nGramCounts[sentence[-2]]:
-                return True
-        return False
-        pass
-
     def getCandidateDictionary(self, sentence):
         """
         Requires: sentence is a list of strings, and trainingDataHasNGram
@@ -84,19 +59,6 @@ class TrigramModel(NGramModel):
         Effects:  returns the dictionary of candidate next words to be added
                   to the current sentence. For details on which words the
                   TrigramModel sees as candidates, see the spec.
-        """
-        """
-        D = {}
-        for i in self.nGramCounts:
-<<<<<<< HEAD
-          if i == sentence[-2]:
-            print 'hey'
-            print 'printing ngramcount',  self.nGramCounts[i]
-            for j in self.nGramCounts[i]:
-              if j == sentence[- 1]:
-                D[self.nGramCounts[i]] = self.nGramCounts[i][j]
-                print 'yo'
-        return D
         """
         D = {}
         if sentence[-2] in self.nGramCounts:
@@ -137,43 +99,6 @@ class TrigramModel(NGramModel):
 
 if __name__ == '__main__':
     # Add your tests here
-    text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    sentence = [ 'the', 'quick', 'brown']
-    sentence2 = [ 'the', 'fat', 'bat']
-    sentence3 = ['the', 'quick']
-    sentence3 = ['quick', 'brown', 'fox']
-    '''Testing trainModel'''
-    print 'Testing trigram trainModel'
-    trigramModel = TrigramModel()
-    print(trigramModel)
-    
-    print 'Test 1'
-    trigramModel.trainModel(text)
-    print trigramModel.nGramCounts
-
-    print 'Test 2'
-    text.append(sentence)
-    trigramModel.trainModel(text)
-    print trigramModel.nGramCounts
-
-    print 'Test 3'
-    text.append(sentence2)
-    trigramModel.trainModel(text)
-    print trigramModel.nGramCounts
-
-    '''
-    Testing trainingDataHasNGram
-    '''
-    print 'Testing trigram trainingDataHasNGram'
-
-    print 'Test 1'
-    print 'Test 1 should return True'
-    print trigramModel.trainingDataHasNGram(sentence)
-
-    print 'Test 2'
-    print 'Test 2 should return False'
-    print trigramModel.trainingDataHasNGram(sentence2)
-    
     '''
     Testing getCandidateDictionary
     '''
