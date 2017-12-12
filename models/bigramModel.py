@@ -46,6 +46,20 @@ class BigramModel(NGramModel):
                     self.nGramCounts[a[i]] = {}
                     self.nGramCounts[a[i]][a[i+1]] = 1
 
+    def trainingDataHasNGram(self, sentence):
+        """
+        Requires: sentence is a list of strings, and len(sentence) >= 1
+        Modifies: nothing
+        Effects:  returns True if this n-gram model can be used to choose
+                  the next token for the sentence. For explanations of how this
+                  is determined for the BigramModel, see the spec.
+        """
+        for i in self.nGramCounts:
+          if i == sentence[-1]:
+            return True
+        return False
+        pass
+
     def getCandidateDictionary(self, sentence):
         """
         Requires: sentence is a list of strings, and trainingDataHasNGram
@@ -62,6 +76,8 @@ class BigramModel(NGramModel):
         #D['.'] = D.pop('$:::$')
         return D
         pass
+
+
 
     def getThreeChoices(self, sentence):
         allChoices = self.getCandidateDictionary(sentence)
@@ -93,6 +109,64 @@ class BigramModel(NGramModel):
 
 if __name__ == '__main__':
     # Add your test cases here
+    text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
+    sentence1 = [ 'quick', 'brown', 'fox']
+    sentence2 = [ 'lazy', 'quick']
+    sentence3 = ['brown', 'fox']
+    sentence4 = ['quick', 'fat']
+    bigramModel = BigramModel()
+    print(bigramModel)
+
+    print 'Testing bigram trainModel'
+
+    print 'Test 1'
+    bigramModel.trainModel(text)
+    print bigramModel.nGramCounts
+
+    print 'Test 2'
+    text.append(sentence1)
+    bigramModel.trainModel(text)
+    print bigramModel.nGramCounts
+
+    print 'Test 3'
+    text.append(sentence2)
+    bigramModel.trainModel(text)
+    print bigramModel.nGramCounts
+
+
+    print bigramModel.trainingDataHasNGram(sentence1)
+    sentence3 = ['the']
+    print bigramModel.getCandidateDictionary(sentence3)
+    song4_lh = [
+    ('g2', 8), ('f#2', 8),
+    ('e2*', 4), ('a2', 4), ('b2', 4), ('a2', 4),
+    ('g2*', 4), ('f#2', 4), ('e2', 4), ('f#2', 4),
+    ('g2*', 4), ('a2', 4), ('b2', 4), ('a2', 4),
+    ('g2*', 4), ('b2', 4), ('e2', 8), ('f#2', 8), ('g2', 8), ('f#2', 8),
+    ('e2*', 4), ('a2', 4), ('b2', 4), ('a2', 4),
+    ('g2*', 4), ('f#2', 4), ('e2', 4), ('f#2', 4),
+    ('g2*', 4), ('c3', 4), ('d3', 4), ('d3', 4),
+    ('b2*', -2),
+    ]
+
+    keys_s = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#']
+    bigramMusic = BigramModel()
+    print bigramMusic.getNextNote(song4_lh, keys_s)
+
+    print 'Testing bigram trainingDataHasNGram'
+
+    print 'Test 1'
+    print 'Test 1 should return True'
+    print bigramModel.trainingDataHasNGram(sentence1)
+
+    print 'Test 2'
+    print 'Test 2 should return False'
+    print bigramModel.trainingDataHasNGram(sentence4)
+    
+    print 'Test 3'
+    print 'Test 3 should return True'
+    print bigramModel.trainingDataHasNGram(sentence3)
+
     print 'Testing getThreeChoices'
     print bigramModel.getThreeChoices(sentence1)
 

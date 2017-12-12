@@ -39,13 +39,12 @@ def initializeResponseEntry():
 '''
 This function initializes the language selection menu
 '''
-
 def initializeLangBox():
     options = ALL_LANGUAGES
     var = StringVar()
     var.set('English')
     box = OptionMenu(root, var, *options, command = updateLangValue)           
-    box.grid(column=0, row=0)
+    box.grid(column=0, row=0, sticky = W)
 
 
 '''
@@ -109,19 +108,18 @@ def buttonPressed(buttonNumber):
 Passes the list of words the user has typed so far and expects suggestions from the getThreeChoices() function
 '''
 def getSuggestions(wordList):
-    #print '1:Getting suggestions...'
+    print '1:Getting suggestions...'
     try:
         s = selectChoices(models, wordList)
         if(len(s) != 3):
-            #print 'Didnt get three suggestions'
+            print 'Didnt get three suggestions'
             s = ['','','']
-
     except:
-        #print 'exception called'
+        print 'exception called'
         return['','','']
 
-    #print 'wordList', wordList
-    #print "suggestion are:", s
+    print 'wordList', wordList
+    print "suggestion are:", s
     return s
 
 '''
@@ -144,14 +142,16 @@ def typing(event):
     global translatedSuggestions
 
     userInput = responseEntry.get("1.0",END)
-    #print '------------'
-    #print 'userInput', userInput
+    print '------------'
+    print 'userInput', userInput
     wordArray = userInput.split() 
 
     if(len(userInput) == 1 or (len(userInput)>1 and userInput[-2] == ' ') ):
         suggestions = getSuggestions(wordArray)
-        #print '2: Got suggestions...'
+        print '2: Got suggestions...'
         setButtonTexts()
+        conclusionText.delete("1.0", END)
+        conclusionText.insert(END, userInput.split()[-2:] ) 
     
     # this case is executed when the user types 1,2, or 3. The corresponding button text is inserted    
     elif(len(userInput)>1 and userInput[-2].isdigit() and int(userInput[-2]) < 4):
@@ -182,19 +182,14 @@ All the GUI functions are called here.
 print 'Loading data...'
 models = trainConversationModels(CONVERDIRS)
 print('Data successfully loaded')
-print ('Please use the GUI!')
 root = Tk()
 root.title('JackBot')
 root.geometry("400x200+150+150")
-lightGreen = '#%02x%02x%02x' % (255, 173, 164)
+lightGreen = '#%02x%02x%02x' % (140, 225, 225)
 root.configure(background=lightGreen)
 root.tk_setPalette(background=lightGreen)
-langLabel = Label(text = "Enter native language:")
-langLabel.grid(column=0, row=0, sticky=W)
 hello = Label(text="Enter your text here:")
 hello.grid(row=1, sticky=W)
-langSelect = Label(text="Select language:")
-langSelect.grid(row=0, sticky=W)
 
 
 
@@ -202,6 +197,10 @@ LangBox = initializeLangBox()
 responseEntry = initializeResponseEntry()
 buttons = initializeButtons()
 
+#Remove for final version
+conclusionText = Text(width=40, height=5)
+conclusionText.insert(END, "What you have typed so far:")
+conclusionText.grid(row=5, columnspan=2)
 
 root.mainloop()
 ################
