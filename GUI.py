@@ -27,7 +27,7 @@ This function creates the text box to receive user input.
 The  text box is sensitive to keyboard input and 
 '''
 def initializeResponseEntry():
-    responseEntry = ScrolledText(width=40, height=6, relief=GROOVE)
+    responseEntry = ScrolledText(width=40, height=6, background=darkSalmon)
     responseEntry.insert(END, 'Type here')
     responseEntry.grid(row=2, sticky=EW, padx=50)
     responseEntry.bind('<KeyRelease>', typing)
@@ -186,15 +186,14 @@ print ('Please use the GUI!')
 root = Tk()
 root.title('JackBot')
 root.geometry("400x200+150+150")
-lightGreen = '#%02x%02x%02x' % (255, 173, 164)
-root.configure(background=lightGreen)
-root.tk_setPalette(background=lightGreen)
+lightSalmon = '#%02x%02x%02x' % (255, 173, 164)
+darkSalmon = '#%02x%02x%02x' % (255, 132, 120)
+root.configure(background=lightSalmon)
+root.tk_setPalette(background=lightSalmon)
 langLabel = Label(text = "Enter native language:")
 langLabel.grid(column=0, row=0, sticky=W)
 hello = Label(text="Enter your text here:")
 hello.grid(row=1, sticky=W)
-langSelect = Label(text="Select language:")
-langSelect.grid(row=0, sticky=W)
 
 
 
