@@ -84,14 +84,3 @@ class NGramModel(object):
         #the sentence. Function will be overriden in child classes
         pass
 
-
-###############################################################################
-# Main
-###############################################################################
-
-if __name__ == '__main__':
-    # Add your tests here
-    
-
-
-
