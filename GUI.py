@@ -45,7 +45,7 @@ def initializeLangBox():
     var = StringVar()
     var.set('English')
     box = OptionMenu(root, var, *options, command = updateLangValue)           
-    box.grid(column=0, row=0, sticky = W)
+    box.grid(column=0, row=0)
 
 
 '''
@@ -152,8 +152,6 @@ def typing(event):
         suggestions = getSuggestions(wordArray)
         #print '2: Got suggestions...'
         setButtonTexts()
-        conclusionText.delete("1.0", END)
-        conclusionText.insert(END, userInput.split()[-2:] ) 
     
     # this case is executed when the user types 1,2, or 3. The corresponding button text is inserted    
     elif(len(userInput)>1 and userInput[-2].isdigit() and int(userInput[-2]) < 4):
@@ -181,15 +179,18 @@ def clearText(event):
 '''
 All the GUI functions are called here.
 '''
-#print 'Loading data...'
+print 'Loading data...'
 models = trainConversationModels(CONVERDIRS)
-#print('Data successfully loaded')
+print('Data successfully loaded')
+print ('Please use the GUI!')
 root = Tk()
 root.title('JackBot')
 root.geometry("400x200+150+150")
 lightGreen = '#%02x%02x%02x' % (140, 225, 225)
 root.configure(background=lightGreen)
 root.tk_setPalette(background=lightGreen)
+langLabel = Label(text = "Enter native language:")
+langLabel.grid(column=0, row=0, sticky=W)
 hello = Label(text="Enter your text here:")
 hello.grid(row=1, sticky=W)
 
