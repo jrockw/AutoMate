@@ -1,5 +1,6 @@
 Please install the following before running our code:
 1) googletrans (sudo pip install googletrans)
+
 Note the project was written with Python 2.7
 
 We have also used TKinter to make the GUI. Usually TKinter comes pre-installed with python. If you don't have TKinter, please install that too.
