@@ -1,4 +1,4 @@
-This is an old project I did in my coding 101 class a few years ago. 
+*This is an old project I did in my coding 101 class a few years ago.* 
 
 
 Please install the following before running our code:
